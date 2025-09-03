@@ -1,0 +1,614 @@
+{
+  "general_info": {
+    "version": "16",
+    "updated_date": "May 15th 2019",
+    "sap_development_team_notes": "eFashion retail Data Warehouse dated 14 Oct 2007. 89,000+ row fact table.",
+    "data_foundation_file": "eFashion.dfx",
+    "properties": {
+      "limit_size_of_result_set_rows": 90000,
+      "limit_execution_time_minutes": 5,
+      "allow_use_of_subqueries": true,
+      "allow_use_of_union_intersect_and_minus_operators": true,
+      "multiple_sql_statements_for_each_measure": true,
+      "allow_complex_operands_in_query_panel": true,
+      "allow_query_stripping": true,
+      "comments": "eFashion Data Warehouse Demo created by G.Bowman October 1998. Copyright Business Objects 1998. DB details: 89,000 line fact table, 10 line promotions 2nd fact table, dual article lookup tables for performance, 2 isolated aggregate tables for demo purposes Updated by Glynn Naughton March 2002 to reflect updates to the database (some columns added, others renamed)."
+    },
+    "dynamic_parameters": {
+      "COLUMNS_SORT": "No",
+      "FILTER_IN_FROM": "No",
+      "CUMULATIVE_OBJECT_WHERE": "No",
+      "FORCE_SORTED_LOV": "No",
+      "DISTINCT_VALUES": "DISTINCT",
+      "AUTO_UPDATE_QUERY": "No",
+      "EVAL_WITHOUT_PARENTHESIS": "No",
+      "THOROUGH_AGGREGATE_AWARE": "No",
+      "CHECK_INTEGRITY": "false"
+    }
+  },
+  "statistics": {
+    "folders": 7,
+    "business_layer_views": 0,
+    "dimensions": 26,
+    "attributes": 13,
+    "measures": 10,
+    "filters": 12,
+    "queries": 1,
+    "lists_of_values": 18,
+    "parameters": 4,
+    "navigation_paths": 3,
+    "data_foundation_counts": {
+      "list_of_values": 0,
+      "parameter": 0,
+      "table": 10,
+      "alias_table": 0,
+      "derived_table": 0,
+      "standard_table": 10,
+      "join": 9,
+      "context": 2,
+      "view": 0,
+      "total": 21
+    }
+  },
+  "data_sources": [
+    {
+      "name": "efashion-webi",
+      "path": "//efashion-webi.cnx",
+      "server_name": "@EC2AMAZ-R9TVLCV.QLIK.CAPGEMINI.COM:6400",
+      "server_type": "Cms"
+    }
+  ],
+  "data_foundation_objects": {
+    "tables": [
+      "Outlet_Lookup",
+      "Shop_facts",
+      "Article_Color_Lookup",
+      "Article_Lookup_Criteria",
+      "product_promotion_facts",
+      "promotion_lookup",
+      "Calendar_year_lookup",
+      "Article_lookup",
+      "Agg_yr_qt_rn_st_ln_ca_sr",
+      "Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma"
+    ],
+    "views": [
+      "Master"
+    ],
+    "joins": [
+      "promotion_lookup.Promotion_id=product_promotion_facts.Promotion_id",
+      "product_promotion_facts.Week_id=Calendar_year_lookup.Week_id",
+      "Outlet_Lookup.Shop_id=Shop_facts.Shop_id",
+      "Article_Lookup_Criteria.Article_id=Article_lookup.Article_id",
+      "Article_lookup.Article_id=Shop_facts.Article_id",
+      "Article_lookup.Article_id=product_promotion_facts.Article_id",
+      "Article_Color_Lookup.Article_id=Shop_facts.Article_id and Article_Color_Lookup.Color_code=Shop_facts.Color_code",
+      "Shop_facts.Week_id=Calendar_year_lookup.Week_id",
+      "product_promotion_facts.Article_id=Shop_facts.Article_id"
+    ],
+    "contexts": [
+      {
+        "name": "Promotions",
+        "tables_in_context": [
+          "promotion_lookup",
+          "product_promotion_facts",
+          "Calendar_year_lookup",
+          "Article_Lookup_Criteria",
+          "Article_lookup"
+        ],
+        "joins_in_context": [
+          "promotion_lookup.Promotion_id=product_promotion_facts.Promotion_id",
+          "product_promotion_facts.Week_id=Calendar_year_lookup.Week_id",
+          "Article_Lookup_Criteria.Article_id=Article_lookup.Article_id",
+          "Article_lookup.Article_id=product_promotion_facts.Article_id"
+        ],
+        "excluded_joins": [
+          "Outlet_Lookup.Shop_id=Shop_facts.Shop_id",
+          "Article_lookup.Article_id=Shop_facts.Article_id",
+          "Article_Color_Lookup.Article_id=Shop_facts.Article_id and Article_Color_Lookup.Color_code=Shop_facts.Color_code",
+          "Shop_facts.Week_id=Calendar_year_lookup.Week_id",
+          "product_promotion_facts.Article_id=Shop_facts.Article_id"
+        ]
+      },
+      {
+        "name": "Shop facts",
+        "tables_in_context": [
+          "Outlet_Lookup",
+          "Shop_facts",
+          "Article_lookup",
+          "Article_Color_Lookup",
+          "Calendar_year_lookup",
+          "product_promotion_facts"
+        ],
+        "joins_in_context": [
+          "Outlet_Lookup.Shop_id=Shop_facts.Shop_id",
+          "Article_lookup.Article_id=Shop_facts.Article_id",
+          "Article_Color_Lookup.Article_id=Shop_facts.Article_id and Article_Color_Lookup.Color_code=Shop_facts.Color_code",
+          "Shop_facts.Week_id=Calendar_year_lookup.Week_id",
+          "product_promotion_facts.Article_id=Shop_facts.Article_id"
+        ],
+        "excluded_joins": [
+          "promotion_lookup.Promotion_id=product_promotion_facts.Promotion_id",
+          "product_promotion_facts.Week_id=Calendar_year_lookup.Week_id",
+          "Article_Lookup_Criteria.Article_id=Article_lookup.Article_id",
+          "Article_lookup.Article_id=product_promotion_facts.Article_id"
+        ]
+      }
+    ]
+  },
+  "folders": [
+    { "name": "Time period", "description": "Time hierarchy", "cuid": "CLS_18", "path": "\\" },
+    { "name": "Store", "description": "Geography and store hierarchy.", "cuid": "CLS_16", "path": "\\" },
+    { "name": "Store details", "description": "Store details referring to Store name.", "cuid": "CLS_5", "path": "\\Store\\" },
+    { "name": "Product", "description": "Product Hierarchy", "cuid": "CLS_13", "path": "\\" },
+    { "name": "Promotions", "description": "Promotions by SKU number over time.", "cuid": "CLS_27", "path": "\\" },
+    { "name": "Transactions Details", "cuid": "_h7VG0MP8Eem_P_kK7Mt2-Q", "path": "\\" },
+    { "name": "Measures", "description": "3 years historical view showing measures in both USD and Euros.", "cuid": "CLS_12", "path": "\\" }
+  ],
+  "parameters": [
+    {
+      "name": "Sales flloor size sqFt?",
+      "hidden": false,
+      "prompt_to_users": true,
+      "prompt_text": "Sales flloor size sqFt?",
+      "data_type": "String",
+      "allow_multiple_values": true,
+      "keep_last_values": true,
+      "index_aware_prompt": false,
+      "select_only_from_list": true,
+      "list_of_values_source": "Static Lov from Sales flloor size sqFt?"
+    },
+    {
+      "name": "Choose a line to analyze?",
+      "hidden": false,
+      "prompt_to_users": true,
+      "prompt_text": "Choose a line to analyze?",
+      "data_type": "String",
+      "allow_multiple_values": true,
+      "keep_last_values": true,
+      "index_aware_prompt": false,
+      "select_only_from_list": true,
+      "list_of_values_source": "Static Lov from Choose a line to analyze?"
+    },
+    {
+      "name": "Choose a category to analyze?",
+      "hidden": false,
+      "prompt_to_users": true,
+      "prompt_text": "Choose a category to analyze?",
+      "data_type": "String",
+      "allow_multiple_values": true,
+      "keep_last_values": true,
+      "index_aware_prompt": false,
+      "select_only_from_list": true,
+      "list_of_values_source": "Static Lov from Choose a category to analyze?"
+    },
+    {
+      "name": "Choose the product descriptions to analyze:",
+      "hidden": false,
+      "prompt_to_users": true,
+      "prompt_text": "Choose the product descriptions to analyze:",
+      "data_type": "String",
+      "allow_multiple_values": true,
+      "keep_last_values": true,
+      "index_aware_prompt": false,
+      "select_only_from_list": true,
+      "list_of_values_source": "SKU desc (Dimension)"
+    }
+  ],
+  "dimensions": [
+    {
+      "name": "Year", "description": "Year 2003 - 2006.", "cuid": "OBJ_188", "path": "\\Time period\\", "state": "Active", "data_type": "String",
+      "sql_definition": "@Aggregate_Aware(Agg_yr_qt_rn_st_ln_ca_sr.Yr,Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma.Yr,Calendar_year_lookup.Yr)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "year05d"
+    },
+    {
+      "name": "Quarter", "description": "Quarter number: Q1, Q2, Q3, Q4.", "cuid": "OBJ_186", "path": "\\Time period\\", "state": "Active", "data_type": "String",
+      "sql_definition": "@Aggregate_Aware(Agg_yr_qt_rn_st_ln_ca_sr.Qtr,Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma.Qtr,'Q' || Calendar_year_lookup.Qtr)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "quart05b"
+    },
+    {
+      "name": "Month", "description": "Month number in year, 1-12.", "cuid": "OBJ_185", "path": "\\Time period\\", "state": "Active", "data_type": "Numeric",
+      "sql_definition": "@Aggregate_Aware(Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma.Mth,Calendar_year_lookup.Mth)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "display_format": "NUMERIC", "list_of_values": "month05a"
+    },
+    {
+      "name": "Week", "description": "Week1-53. Week 53 may overlap with week 1 of the following year.", "cuid": "OBJ_260", "path": "\\Time period\\", "state": "Active", "data_type": "Numeric",
+      "sql_definition": "@Aggregate_Aware(Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma.Wk,Calendar_year_lookup.Week_In_Year)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Holiday (y/n)", "description": "Holiday flag in week. Y=US public holiday during the time period, N=No holiday. Can be mixed with any time period dimension.", "cuid": "OBJ_290", "path": "\\Time period\\", "state": "Active", "data_type": "String",
+      "sql_definition": "upper(Calendar_year_lookup.Holiday_Flag)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "State", "description": "State located.", "cuid": "OBJ_218", "path": "\\Store\\", "state": "Active", "data_type": "String",
+      "sql_definition": "@Aggregate_Aware(Agg_yr_qt_rn_st_ln_ca_sr.State,Outlet_Lookup.State)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "state068"
+    },
+    {
+      "name": "City", "description": "City located.", "cuid": "OBJ_166", "path": "\\Store\\", "state": "Active", "data_type": "String",
+      "sql_definition": "@Aggregate_Aware(Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma.City,Outlet_Lookup.City)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "ville01v"
+    },
+    {
+      "name": "Store name", "description": "Name of store.", "cuid": "OBJ_376", "path": "\\Store\\", "state": "Active", "data_type": "String",
+      "sql_definition": "@Aggregate_Aware(Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma.Store_name,Outlet_Lookup.Shop_name)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "nom_m01k"
+    },
+    {
+      "name": "Long opening hours", "description": "Y=Late night opening, N=Normal store hours.", "cuid": "OBJ_62", "path": "\\Store\\Store details\\", "state": "Active", "data_type": "String",
+      "sql_definition": "Outlet_Lookup.Long_opening_hours_flag",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Name of manager", "description": "Manager's name.", "cuid": "OBJ_60", "path": "\\Store\\Store details\\", "state": "Active", "data_type": "String",
+      "sql_definition": "Outlet_Lookup.Manager",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Opening date", "description": "Date store opened.", "cuid": "OBJ_61", "path": "\\Store\\Store details\\", "state": "Active", "data_type": "String",
+      "sql_definition": "Outlet_Lookup.Date_open",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Owned (y/n)", "description": "Y=Wholly owned by e-Fashion, N=Franchise", "cuid": "OBJ_63", "path": "\\Store\\Store details\\", "state": "Active", "data_type": "String",
+      "sql_definition": "Outlet_Lookup.Owned_outright_flag",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Sales floor size group", "description": "Sales floor size group: 0-999, 1000-1999, 2000-2999, 3000-3999, 4000-4999, 5000+.", "cuid": "OBJ_214", "path": "\\Store\\Store details\\", "state": "Active", "data_type": "String",
+      "sql_definition": "CASE WHEN Outlet_Lookup.Floor_space >= 0 AND Outlet_Lookup.Floor_space < 1000 THEN '0-999' WHEN Outlet_Lookup.Floor_space >= 1000 AND Outlet_Lookup.Floor_space < 2000 THEN '1000-1999' WHEN Outlet_Lookup.Floor_space >= 2000 AND Outlet_Lookup.Floor_space < 3000 THEN '2000-2999' WHEN Outlet_Lookup.Floor_space >= 3000 AND Outlet_Lookup.Floor_space < 4000 THEN '3000-3999' WHEN Outlet_Lookup.Floor_space >= 4000 AND Outlet_Lookup.Floor_space < 5000 THEN '4000-4999' ELSE '5000 +' END",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "surfa01t"
+    },
+    {
+      "name": "Lines", "description": "Product line. Each line contains a set of categories.", "cuid": "OBJ_165", "path": "\\Product\\", "state": "Active", "data_type": "String",
+      "sql_definition": "@Aggregate_Aware(Agg_yr_qt_rn_st_ln_ca_sr.Line,Article_lookup.Family_name,Article_Color_Lookup.Family_name)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Category", "description": "Each category contains the individual SKU codes (and product descriptions).", "cuid": "OBJ_508", "path": "\\Product\\", "state": "Active", "data_type": "String",
+      "sql_definition": "@Aggregate_Aware(Agg_yr_qt_rn_st_ln_ca_sr.Category,Article_lookup.Category,Article_Color_Lookup.Category)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "categ0ei"
+    },
+    {
+      "name": "SKU number", "description": "Stock Keeping Unit number (SKU).The lowest level of product description.", "cuid": "OBJ_216", "path": "\\Product\\", "state": "Active", "data_type": "Numeric",
+      "sql_definition": "@Aggregate_Aware(Article_lookup.Article_id,Article_Color_Lookup.Article_id)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "display_format": "NUMERIC", "list_of_values": "artic066"
+    },
+    {
+      "name": "SKU desc", "description": "Stock Keeping Unit description (SKU). Lowest level of product description. Each product comes in several different colors.", "cuid": "OBJ_152", "path": "\\Product\\", "state": "Active", "data_type": "String",
+      "sql_definition": "@Aggregate_Aware(Article_lookup.Article_label,Article_Color_Lookup.Article_label)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "libel04c"
+    },
+    {
+      "name": "Color", "description": "Color of an article. Each SKU number has many color variations (there is not a unique SKU for each color). Color is not compatible with Product Promotions, only SKU.", "cuid": "OBJ_153", "path": "\\Product\\", "state": "Active", "data_type": "String",
+      "sql_definition": "Article_Color_Lookup.Color_label",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "libel04d"
+    },
+    {
+      "name": "Unit Price MSRP", "description": "This is the manufacturers suggested retail price per SKU and color.", "cuid": "OBJ_154", "path": "\\Product\\", "state": "Active", "data_type": "Numeric",
+      "sql_definition": "@Aggregate_Aware(Article_lookup.Sale_price,Article_Color_Lookup.Sale_price)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable", "display_format": "NUMERIC"
+    },
+    {
+      "name": "Promotion (y/n)", "description": "Promotion flag (yes or no) by SKU unit.", "cuid": "OBJ_266", "path": "\\Promotions\\", "state": "Active", "data_type": "String",
+      "sql_definition": "promotion_lookup.Promotion_flag",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Duration", "description": "Duration in weeks of promotion.", "cuid": "OBJ_261", "path": "\\Promotions\\", "state": "Active", "data_type": "Numeric",
+      "sql_definition": "product_promotion_facts.Duration",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Transaction number", "cuid": "_qEJoEMP8Eem_P_kK7Mt2-Q", "path": "\\Transactions Details\\", "state": "Active", "data_type": "Numeric",
+      "sql_definition": "Shop_facts.Shop_facts_id",
+      "can_be_used_in": ["Results", "Filters", "Sorts"]
+    },
+    {
+      "name": "Transaction Date", "cuid": "_tq0z0MP8Eem_P_kK7Mt2-Q", "path": "\\Transactions Details\\", "state": "Active", "data_type": "Date",
+      "sql_definition": "Shop_facts.Invoice_Date",
+      "can_be_used_in": ["Results", "Filters", "Sorts"]
+    },
+    {
+      "name": "Transaction Date Time", "cuid": "_wp3X0cP8Eem_P_kK7Mt2-Q", "path": "\\Transactions Details\\", "state": "Active", "data_type": "DateTime",
+      "sql_definition": "Shop_facts.Invoice_DateTime",
+      "can_be_used_in": ["Results", "Filters", "Sorts"]
+    },
+    {
+      "name": "Store Supplier", "cuid": "_zsCIUMP8Eem_P_kK7Mt2-Q", "path": "\\Transactions Details\\", "state": "Active", "data_type": "String",
+      "sql_definition": "Outlet_Lookup.Shop_name",
+      "can_be_used_in": ["Results", "Filters", "Sorts"]
+    },
+    {
+      "name": "Article Ordered", "cuid": "_23mFYcP8Eem_P_kK7Mt2-Q", "path": "\\Transactions Details\\", "state": "Active", "data_type": "String",
+      "sql_definition": "Article_Color_Lookup.Article_label",
+      "can_be_used_in": ["Results", "Filters", "Sorts"]
+    }
+  ],
+  "attributes": [
+    {
+      "name": "Fiscal Period", "description": "Year FY99 - FY01", "cuid": "OBJ_187", "state": "Active", "data_type": "String",
+      "aggregatable": true, "sql_definition": "Calendar_year_lookup.Fiscal_Period",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "fisca05c"
+    },
+    {
+      "name": "Month Name", "description": "Month name, January-December.", "cuid": "OBJ_196", "state": "Active", "data_type": "String",
+      "aggregatable": true, "sql_definition": "@Aggregate_Aware(Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma.Month_name,Calendar_year_lookup.Month_Name)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "month05l"
+    },
+    {
+      "name": "Year/week", "description": "Week 2003/1 to 2006/53 - Unique year and week describing date. Use this to create conditions across year boundaries. i.e. Christmas period = 2003/52 to 2006/1.", "cuid": "OBJ_502", "state": "Active", "data_type": "String",
+      "aggregatable": true, "sql_definition": "Calendar_year_lookup.Year_Week",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "year_0ec"
+    },
+    {
+      "name": "Zip Code", "description": "Zip code", "cuid": "OBJ_219", "state": "Active", "data_type": "Numeric",
+      "aggregatable": true, "sql_definition": "Outlet_Lookup.Zip_code",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "display_format": "NUMERIC", "list_of_values": "Editable"
+    },
+    {
+      "name": "Address", "description": "Address of store", "cuid": "OBJ_378", "state": "Active", "data_type": "String",
+      "aggregatable": true, "sql_definition": "Outlet_Lookup.Address_1",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Sales floor size sqFt", "description": "Actual sales floor size in sqFt", "cuid": "OBJ_64", "state": "Active", "data_type": "Numeric",
+      "aggregatable": true, "sql_definition": "Outlet_Lookup.Floor_space",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "display_format": "NUMERIC", "list_of_values": "Editable"
+    },
+    {
+      "name": "Label", "description": "Detailed information about each product", "cuid": "OBJ_468", "state": "Active", "data_type": "String",
+      "aggregatable": true, "sql_definition": "Article_Lookup_Criteria.Criteria_type_label || ': ' || Article_Lookup_Criteria.Criteria_label",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "objec0dd"
+    },
+    {
+      "name": "Color number", "description": "Official color number. Object incompatible with Product Promotions.", "cuid": "OBJ_440", "state": "Active", "data_type": "Numeric",
+      "aggregatable": true, "sql_definition": "Article_Color_Lookup.Color_code",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "display_format": "NUMERIC", "list_of_values": "Editable"
+    },
+    {
+      "name": "Print", "description": "Appear in print (yes or no)?", "cuid": "OBJ_267", "state": "Active", "data_type": "String",
+      "aggregatable": true, "sql_definition": "promotion_lookup.Print_flag",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Radio", "description": "Appear in radio (yes or no)?", "cuid": "OBJ_268", "state": "Active", "data_type": "String",
+      "aggregatable": true, "sql_definition": "promotion_lookup.Radio_flag",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Television", "description": "Appear on television (yes or no)?", "cuid": "OBJ_269", "state": "Active", "data_type": "String",
+      "aggregatable": true, "sql_definition": "promotion_lookup.Television_flag",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Direct mail", "description": "Appear in direct mail (yes or no)?", "cuid": "OBJ_270", "state": "Active", "data_type": "String",
+      "aggregatable": true, "sql_definition": "promotion_lookup.Direct_mail_flag",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable"
+    },
+    {
+      "name": "Color", "cuid": "_XUvtMMP9Eem_P_kK7Mt2-Q", "state": "Active", "data_type": "String",
+      "aggregatable": true, "sql_definition": "Article_Color_Lookup.Color_label",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Allow user to search values in the database"
+    }
+  ],
+  "measures": [
+    {
+      "name": "Extended sales floor size", "description": "Summed sales floor size. Can only be mixed with geography information relating to a store or group of stores. It cannot be used to show the SqFt of a store over time for instance.", "cuid": "OBJ_314", "path": "\\Store\\Store details\\", "state": "Active", "data_type": "Numeric",
+      "projection_function": "Sum", "high_precision": false, "sql_definition": "sum (Outlet_Lookup.Floor_space)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable", "display_format": "NUMERIC"
+    },
+    {
+      "name": "Extended price", "description": "The extended price let's you display the sum of prices over another dimension (such as outlet). When used with SKU number all the color variations (of each SKU) are added together.", "cuid": "OBJ_194", "path": "\\Product\\", "state": "Active", "data_type": "Numeric",
+      "projection_function": "Sum", "high_precision": false, "sql_definition": "@Aggregate_Aware(sum(Article_lookup.Sale_price),sum(Article_Color_Lookup.Sale_price))",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable", "display_format": "NUMERIC"
+    },
+    {
+      "name": "Sold at (unit price)", "description": "This is the actual unit price per SKU obtained at sale time (i.e. Revenue/Quantity)", "cuid": "OBJ_323", "path": "\\Product\\", "state": "Active", "data_type": "Numeric",
+      "projection_function": "Sum", "high_precision": false, "sql_definition": "CASE WHEN @Select(Measures\\Sales revenue)>0 THEN CASE WHEN @Select(Measures\\Quantity sold)>=0 THEN @Select(Measures\\Sales revenue)/@Select(Measures\\Quantity sold) END END",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable", "display_format": "NUMERIC"
+    },
+    {
+      "name": "Promotion Cost USD", "description": "Cost of promoting the SKU (in US dollars).", "cuid": "OBJ_262", "path": "\\Promotions\\", "state": "Active", "data_type": "Numeric",
+      "projection_function": "Sum", "high_precision": false, "sql_definition": "sum(product_promotion_facts.Promotion_cost)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable", "display_format": "NUMERIC"
+    },
+    {
+      "name": "Transaction Amount", "cuid": "_73ZAMMP8Eem_P_kK7Mt2-Q", "path": "\\Transactions Details\\", "state": "Active", "data_type": "Numeric",
+      "projection_function": "Sum", "high_precision": false, "sql_definition": "sum(Shop_facts.Amount_sold)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"]
+    },
+    {
+      "name": "Quantity per Transaction", "cuid": "_AWPxIMP9Eem_P_kK7Mt2-Q", "path": "\\Transactions Details\\", "state": "Active", "data_type": "Numeric",
+      "projection_function": "Sum", "high_precision": false, "sql_definition": "sum(Shop_facts.Quantity_sold)",
+      "can_be_used_in": ["Results", "Filters", "Sorts"]
+    },
+    {
+      "name": "Sales revenue", "description": "Sales revenue $ - $ revenue of SKU sold", "cuid": "OBJ_147", "path": "\\Measures\\", "state": "Active", "data_type": "Numeric",
+      "projection_function": "Sum", "high_precision": false, "sql_definition": "@Aggregate_Aware(sum(Agg_yr_qt_rn_st_ln_ca_sr.Sales_revenue),sum(Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma.Sales_revenue),sum(Shop_facts.Amount_sold))",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable", "display_format": "NUMERIC"
+    },
+    {
+      "name": "Quantity sold", "description": "Quantity sold - number of SKU sold", "cuid": "OBJ_148", "path": "\\Measures\\", "state": "Active", "data_type": "Numeric",
+      "projection_function": "Sum", "high_precision": false, "sql_definition": "@Aggregate_Aware(sum(Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma.Quantity_sold),sum(Shop_facts.Quantity_sold))",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable", "display_format": "NUMERIC"
+    },
+    {
+      "name": "Margin", "description": "Margin $ = Revenue - Cost of sales", "cuid": "OBJ_146", "path": "\\Measures\\", "state": "Active", "data_type": "Numeric",
+      "projection_function": "Sum", "high_precision": false, "sql_definition": "@Aggregate_Aware(sum(Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma.Margin),sum(Shop_facts.Margin))",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable", "display_format": "NUMERIC"
+    },
+    {
+      "name": "Discount", "description": "Total discount of a SKU. Discount= Qty * Unit Price - Revenue. Negative sums indicate the product was marked up (increased margin). Note discount is a calculated object (it does not exist in the fact table).", "cuid": "OBJ_191", "path": "\\Measures\\", "state": "Active", "data_type": "Numeric",
+      "projection_function": "Sum", "high_precision": false, "sql_definition": "@Aggregate_Aware(sum(Shop_facts.Quantity_sold * Article_lookup.Sale_price - Shop_facts.Amount_sold),sum(Shop_facts.Quantity_sold * Article_Color_Lookup.Sale_price - Shop_facts.Amount_sold)) Where expression Shop_facts.Week_id=Calendar_year_lookup.Week_id",
+      "can_be_used_in": ["Results", "Filters", "Sorts"], "list_of_values": "Editable", "display_format": "NUMERIC"
+    }
+  ],
+  "filters": [
+    {
+      "name": "Last year", "description": "Show last year results only - year 2015", "cuid": "FIL_2", "path": "\\Time period\\", "state": "Active", "filter_type": "NATIVE",
+      "where_expression": "Calendar_year_lookup.Yr = '2018'"
+    },
+    {
+      "name": "This year", "description": "Show this year results only - year 2016", "cuid": "FIL_1", "path": "\\Time period\\", "state": "Active", "filter_type": "NATIVE",
+      "where_expression": "Calendar_year_lookup.Yr= '2019'"
+    },
+    {
+      "name": "Christmas period", "description": "Filter for Christmas rush period - Weeks 46 to 52 (incl. occasional week 53)", "cuid": "FIL_3", "path": "\\Time period\\", "state": "Active", "filter_type": "NATIVE",
+      "where_expression": "Calendar_year_lookup.Week_In_Year BETWEEN 46 AND 53"
+    },
+    {
+      "name": "Holiday period", "description": "Filter for weeks that contain holiday periods", "cuid": "FIL_11", "path": "\\Time period\\", "state": "Active", "filter_type": "NATIVE",
+      "where_expression": "upper(Calendar_year_lookup.Holiday_Flag) = 'Y'"
+    },
+    {
+      "name": "Sales floor size?", "description": "Prompt for sales floor group - '0-99','100-199','200-299','300-399','400-499','500+", "cuid": "FIL_6", "path": "\\Store\\", "state": "Active", "filter_type": "NATIVE",
+      "where_expression": "(CASE WHEN Outlet_Lookup.Floor_space >= 0 AND Outlet_Lookup.Floor_space < 1000 THEN '0-999' WHEN Outlet_Lookup.Floor_space >= 1000 AND Outlet_Lookup.Floor_space < 2000 THEN '1000-1999' WHEN Outlet_Lookup.Floor_space >= 2000 AND Outlet_Lookup.Floor_space < 3000 THEN '2000-2999' WHEN Outlet_Lookup.Floor_space >= 3000 AND Outlet_Lookup.Floor_space < 4000 THEN '3000-3999' WHEN Outlet_Lookup.Floor_space >= 4000 AND Outlet_Lookup.Floor_space < 5000 THEN '4000-4999' ELSE '5000 +' END) IN @Prompt(Sales flloor size sqFt?)"
+    },
+    {
+      "name": "Owned stores", "description": "Filter for wholly owned stores, rather than franchises", "cuid": "FIL_12", "path": "\\Store\\", "state": "Active", "filter_type": "NATIVE",
+      "where_expression": "@Select(Store\\Store details\\Owned (y/n)) = 'Y'"
+    },
+    {
+      "name": "Stores with long opening hours", "description": "Filter for stores with long opening hours", "cuid": "FIL_13", "path": "\\Store\\", "state": "Active", "filter_type": "NATIVE",
+      "where_expression": "@Select(Store\\Store details\\Long opening hours) = 'Y'"
+    },
+    {
+      "name": "Prompt for a line item?", "cuid": "FIL_9", "path": "\\Product\\", "state": "Active", "filter_type": "NATIVE",
+      "where_expression": "Article_Color_Lookup.Family_name IN @Prompt(Choose a line to analyze?)"
+    },
+    {
+      "name": "Which category?", "description": "Prompt for the product category", "cuid": "FIL_8", "path": "\\Product\\", "state": "Active", "filter_type": "NATIVE",
+      "where_expression": "Article_Color_Lookup.Category IN @Prompt(Choose a category to analyze?)"
+    },
+    {
+      "name": "Which product?", "description": "Prompt for the product description name.", "cuid": "FIL_10", "path": "\\Product\\", "state": "Active", "filter_type": "NATIVE",
+      "where_expression": "Article_Color_Lookup.Article_label IN @Prompt(Choose the product descriptions to analyze:)"
+    }
+  ],
+  "navigation_paths": [
+    {
+      "name": "Time period",
+      "items": [
+        { "name": "Year", "path": "Time period\\Year", "description": "Year 2003 - 2006." },
+        { "name": "Quarter", "path": "Time period\\Quarter", "description": "Quarter number: Q1, Q2, Q3, Q4." },
+        { "name": "Month", "path": "Time period\\Month", "description": "Month number in year, 1-12." },
+        { "name": "Week", "path": "Time period\\Week", "description": "Week1-53. Week 53 may overlap with week 1 of the following year." },
+        { "name": "Holiday (y/n)", "path": "Time period\\Holiday (y/n)", "description": "Holiday flag in week. Y=US public holiday during the time period, N=No holiday. Can be mixed with any time period dimension." }
+      ]
+    },
+    {
+      "name": "Store",
+      "items": [
+        { "name": "State", "path": "Store\\State", "description": "State located." },
+        { "name": "City", "path": "Store\\City", "description": "City located." },
+        { "name": "Store name", "path": "Store\\Store name", "description": "Name of store." }
+      ]
+    }
+  ],
+  "list_of_values_definitions": [
+    {
+      "name": "artic066", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "SKU number"
+    },
+    {
+      "name": "state068", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "State"
+    },
+    {
+      "name": "nom_m01k", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "Store name"
+    },
+    {
+      "name": "objec0dd", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "Label"
+    },
+    {
+      "name": "year_0ec", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "Year/week"
+    },
+    {
+      "name": "categ0ei", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "Category"
+    },
+    {
+      "name": "Static Lov from Sales flloor size sqFt?",
+      "column_0_data_type": "String"
+    },
+    {
+      "name": "Static Lov from Choose a line to analyze?",
+      "column_0_data_type": "String"
+    },
+    {
+      "name": "Static Lov from Choose a category to analyze?",
+      "column_0_data_type": "String"
+    },
+    {
+      "name": "libel04c", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "SKU desc"
+    },
+    {
+      "name": "libel04d", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "Color"
+    },
+    {
+      "name": "ville01v", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "City"
+    },
+    {
+      "name": "month05a", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "Month"
+    },
+    {
+      "name": "quart05b", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "Quarter"
+    },
+    {
+      "name": "fisca05c", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "Fiscal Period"
+    },
+    {
+      "name": "year05d", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "Year"
+    },
+    {
+      "name": "month05l", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "Month Name"
+    },
+    {
+      "name": "surfa01t", "force_users_to_filter_values_before_use": false,
+      "allow_users_to_search_values_in_the_database": false,
+      "max_number_of_rows": 90000, "query_execution_timeout": 300,
+      "result_object": "Sales floor size group"
+    }
+  ]
+}

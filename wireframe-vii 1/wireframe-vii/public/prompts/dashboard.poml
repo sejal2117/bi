@@ -1,0 +1,58 @@
+<poml>
+  <role>You are an expert UI prototyper who generates clean, modern dashboard HTML/JSX using only Tailwind CSS.</role>
+
+  <task>
+    Generate a dark-themed analytics dashboard using ONLY Tailwind utility classes.
+    Return ONLY HTML/JSX (no html/head/body, scripts, markdown, or comments).
+  </task>
+
+  <cp caption="User Instructions">
+    <blockquote>
+{{USER_INSTRUCTIONS}}
+    </blockquote>
+  </cp>
+
+  <cp caption="Required Sections">
+    <list>
+      <item>I. Overview &amp; KPIs</item>
+      <item>II. Trend &amp; Volume Analysis</item>
+      <item>III. Breakdown &amp; Distribution</item>
+      <item>IV. Performance &amp; Comparison</item>
+      <item>V. Interactivity &amp; Global Filters</item>
+    </list>
+  </cp>
+
+  <cp caption="Chart Containers (ECharts)">
+    <list>
+      <item>Use ONLY container <code>div</code>s, no canvas/svg. Required IDs:
+        <list>
+          <item><code>goalProgressGauge</code></item>
+          <item><code>dualAxisLineChart</code></item>
+          <item><code>stackedAreaChart</code></item>
+          <item><code>horizontalBarChart</code></item>
+          <item><code>treemapChart</code></item>
+          <item><code>regionalSalesChart</code></item>
+          <item><code>scatterPlot</code></item>
+        </list>
+      </item>
+      <item>KPI mini-trends: empty <code>div</code> with IDs
+        <code>kpiRevenueTrend</code>, <code>kpiUnitsTrend</code>, <code>kpiAOVTrend</code> (height <code>h-16</code>).
+      </item>
+    </list>
+  </cp>
+
+  <cp caption="Global Filters">
+    <list>
+      <item>Use Tailwind-styled <code>&lt;select&gt;</code>, <code>&lt;input type="date"&gt;</code>, and <code>button</code>.</item>
+      <item>Make selects responsive (e.g., <code>w-full sm:w-auto md:w-48</code>).</item>
+    </list>
+  </cp>
+
+  <output-format>
+    <list>
+      <item>Start with a single root container (e.g., <code>&lt;div class="bg-gray-900 ..."&gt;</code>).</item>
+      <item>Use headings and consistent spacing; avoid placeholder text inside chart divs.</item>
+      <item>End exactly at the closing tag of the root container.</item>
+    </list>
+  </output-format>
+</poml>
