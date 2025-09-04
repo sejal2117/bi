@@ -1,0 +1,37 @@
+{
+  "report": {
+    "name": "Sales Performance Dashboard",
+    "formulas": [
+      {
+        "name": "HighValueFlag",
+        "expression": "If([Revenue] > 10000; 'High'; 'Low')"
+      },
+      {
+        "name": "DiscountRate",
+        "expression": "If([CustomerType] = 'VIP'; 0.15; 0.05)"
+      },
+      {
+        "name": "RegionalBonus",
+        "expression": "Case When [Region] = 'APAC' Then [Sales] * 1.1 When [Region] = 'EMEA' Then [Sales] * 1.05 Else [Sales] End"
+      },
+      {
+        "name": "SalesStatus",
+        "expression": "If([SalesAmount] > [SalesTarget]; 'Above Target'; 'Below Target')"
+      }
+    ],
+    "variables": [
+      {
+        "name": "CurrentQuarterSales",
+        "expression": "Sum(Sales.Amount) Where Quarter([OrderDate]) = Quarter(CurrentDate())"
+      },
+      {
+        "name": "YTDRevenue",
+        "expression": "Sum(Revenue.Amount) Where Year([TransactionDate]) = Year(CurrentDate())"
+      },
+      {
+        "name": "CustomerCount",
+        "expression": "Count(Distinct Customer.CustomerID)"
+      }
+    ]
+  }
+}
