@@ -1,0 +1,180 @@
+table alternative_routes_suggestions
+	lineageTag: 1089475a-89ee-4f26-86e5-db41f2006f8c
+
+	column Original_ProductID
+		dataType: string
+		lineageTag: beea0b0a-57b5-4bdc-8d34-b965b2a2f53c
+		summarizeBy: none
+		sourceColumn: Original_ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Original_RouteID
+		dataType: string
+		lineageTag: 03f2a825-43fc-4226-bd7a-c31f29ef8fca
+		summarizeBy: none
+		sourceColumn: Original_RouteID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Original_PredefinedRouteName
+		dataType: string
+		lineageTag: 01d6618e-9883-4277-877d-113b37718620
+		summarizeBy: none
+		sourceColumn: Original_PredefinedRouteName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Original_OriginCountry
+		dataType: string
+		lineageTag: 9dd09094-b94e-43d7-94f6-1cc476b4e523
+		summarizeBy: none
+		sourceColumn: Original_OriginCountry
+
+		annotation SummarizationSetBy = Automatic
+
+	column Original_DestCountry
+		dataType: string
+		lineageTag: e96be170-3eb2-44c9-887e-cd709008c5b3
+		summarizeBy: none
+		sourceColumn: Original_DestCountry
+
+		annotation SummarizationSetBy = Automatic
+
+	column Original_Problem_Reason
+		dataType: string
+		lineageTag: bc96e566-eb7f-4683-9240-70f00a1fdc3a
+		summarizeBy: none
+		sourceColumn: Original_Problem_Reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alternative_RouteName
+		dataType: string
+		lineageTag: 79033e96-49c2-438e-b101-120f4bb0906a
+		summarizeBy: none
+		sourceColumn: Alternative_RouteName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alternative_RouteDistanceKM
+		dataType: double
+		lineageTag: 54545e5d-d434-4e18-8e82-2f6e2d946244
+		summarizeBy: sum
+		sourceColumn: Alternative_RouteDistanceKM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Alternative_RouteDurationMinutes
+		dataType: double
+		lineageTag: 55fa3033-3eb2-498c-a835-5797c6938468
+		summarizeBy: sum
+		sourceColumn: Alternative_RouteDurationMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Alternative_WeatherDescription
+		dataType: string
+		lineageTag: cc914a3c-18d3-48ba-9162-bedf8fe7be52
+		summarizeBy: none
+		sourceColumn: Alternative_WeatherDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alternative_TemperatureCelsius
+		dataType: int64
+		formatString: 0
+		lineageTag: 35014694-3177-4366-83a5-d044f3691f79
+		summarizeBy: sum
+		sourceColumn: Alternative_TemperatureCelsius
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alternative_WindSpeedMetersSec
+		dataType: int64
+		formatString: 0
+		lineageTag: b9f89486-af3a-4717-9d5d-86e78fb1c4c8
+		summarizeBy: sum
+		sourceColumn: Alternative_WindSpeedMetersSec
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alternative_PrecipitationMM
+		dataType: double
+		lineageTag: 8bb24e7b-68a7-49c1-890e-f212c469c98f
+		summarizeBy: sum
+		sourceColumn: Alternative_PrecipitationMM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Alternative_Suggestion_Timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 41950aa0-63e0-44c6-a3ef-dc8f9cf671b8
+		summarizeBy: none
+		sourceColumn: Alternative_Suggestion_Timestamp
+
+		variation Variation
+			isDefault
+			relationship: 5d0c01b4-4766-4183-8f0a-2327805f3a80
+			defaultHierarchy: LocalDateTable_d166f3f2-a2dd-45e2-9922-2282624a81ce.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alternative_Suggestion_Error
+		dataType: string
+		lineageTag: 67ad80b3-3d1b-45d2-8d71-a863066172f6
+		summarizeBy: none
+		sourceColumn: Alternative_Suggestion_Error
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Alternative Duration Difference' =
+			
+			'alternative_routes_suggestions'[Alternative_RouteDurationMinutes] - RELATED('SupplyChainData'[RouteDurationMinutes])
+		lineageTag: 7ca37c54-4b64-43ea-87f0-f7ebba0d5fc1
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		type: calculated
+		lineageTag: 9419551d-b493-4cdc-9152-da8de40a7bbb
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation 43dbc3e8-3a1c-4b6f-9923-b49ff7d6691c = True
+
+	column 'Alternative Distance Difference' =
+			
+			'alternative_routes_suggestions'[Alternative_RouteDistanceKM] - RELATED('SupplyChainData'[RouteDistanceKM])
+		lineageTag: aedc8848-dad1-4e7f-8ed3-8cd3265baa18
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition alternative_routes_suggestions = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\DAHMAD\Downloads\FinalSupplyChain\Supply_B\alternatives\alternative_routes_suggestions.csv"),[Delimiter=",", Columns=15, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Original_ProductID", type text}, {"Original_RouteID", type text}, {"Original_PredefinedRouteName", type text}, {"Original_OriginCountry", type text}, {"Original_DestCountry", type text}, {"Original_Problem_Reason", type text}, {"Alternative_RouteName", type text}, {"Alternative_RouteDistanceKM", type number}, {"Alternative_RouteDurationMinutes", type number}, {"Alternative_WeatherDescription", type text}, {"Alternative_TemperatureCelsius", Int64.Type}, {"Alternative_WindSpeedMetersSec", Int64.Type}, {"Alternative_PrecipitationMM", type number}, {"Alternative_Suggestion_Timestamp", type datetime}, {"Alternative_Suggestion_Error", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

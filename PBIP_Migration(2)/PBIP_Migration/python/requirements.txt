@@ -1,0 +1,9 @@
+msal
+pbipy
+pbixray
+kaitaistruct
+apsw
+pbip-tools
+pyyaml
+pbi_core
+mseep-pbixray-mcp-server

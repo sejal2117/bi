@@ -1,0 +1,23 @@
+model
+  name: "WF_ExecutiveModel"
+  culture: "en-US"
+
+table "Placeholders"
+  dataCategory: None
+
+  column "PlaceholderRevenue"
+    dataType: double
+
+  column "PlaceholderCount"
+    dataType: int64
+
+  column "PlaceholderText"
+    dataType: string
+
+  measure "Revenue"
+    expression: "SUM ( 'Placeholders'[PlaceholderRevenue] )"
+    formatString: "\$ #,0"
+
+  measure "Count"
+    expression: "SUM ( 'Placeholders'[PlaceholderCount] )"
+    formatString: "#,0"

@@ -1,0 +1,6 @@
+{
+  "source": "SAP_BO_to_PowerBI_Migration_Guide.md",
+  "universe_to_dataset": true,
+  "prompts_to_parameters": true,
+  "rls_required": true
+}

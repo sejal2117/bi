@@ -1,0 +1,251 @@
+table _Measures
+	lineageTag: 482ee723-e4f9-48d0-82d4-1b1861a2cc48
+
+	measure 'Total Order Quantity' = SUM(SupplyChainData[OrderQuantity])
+		formatString: 0
+		lineageTag: 79a0da08-1546-42a2-8bc3-b68d9df86eb0
+
+	measure 'Total Revenue' = SUM(SupplyChainData[TotalRevenue])
+		lineageTag: 3f8d0623-6b47-4374-8db5-f49953b0c95f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Unit Price' = AVERAGE(SupplyChainData[UnitPrice])
+		lineageTag: 8b04606c-4068-4e4e-8dfa-81bdd6d9d5b3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Fuel Cost' = ```
+			SUM(SupplyChainData[FuelCostUSD])
+			
+			```
+		lineageTag: bfdf5c21-2dae-4764-ba84-c097b3186fd0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Carbon Footprint' = SUM(SupplyChainData[CarbonFootprintKG])
+		lineageTag: 5795d6f0-c476-494a-b0d6-d596604b6428
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Route Distance KM' = ```
+			AVERAGE(SupplyChainData[RouteDistanceKM])
+			
+			```
+		lineageTag: e021a876-1aa7-4aa9-81bd-ed71b0f9cc4f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Route Duration Minutes' = AVERAGE(SupplyChainData[RouteDurationMinutes])
+		lineageTag: 06f64c4b-4558-4ffd-801e-5fcccdb0a826
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Number of Orders' = COUNTROWS(SupplyChainData)
+		formatString: 0
+		lineageTag: 2fb38a99-a257-419f-a7b1-98b9a4880dd1
+
+	measure 'Total Predicted Order Quantity' = SUM(SupplyChainData[Predicted_OrderQuantity])
+		lineageTag: b11ec9e1-adbf-4c1f-b5a8-fe0014e59735
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Predicted Revenue' = SUM(SupplyChainData[Predicted_TotalRevenue])
+		lineageTag: f2c1984a-343b-43a2-a68a-820e9028b9a3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Predicted Fuel Cost' = SUM(SupplyChainData[Predicted_FuelCostUSD])
+		lineageTag: cb4d52b1-a69f-4a01-aa71-2d681b92517c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Predicted Carbon Footprint' = SUM(SupplyChainData[Predicted_CarbonFootprintKG])
+		lineageTag: 9418bc50-4366-41fa-acdd-924eeef92f73
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Predicted Route Duration' = AVERAGE(SupplyChainData[Predicted_RouteDurationMinutes])
+		lineageTag: 2dcf57e2-d9df-40c4-9802-56314f7bff2c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Revenue Prediction Error' = ```
+			SUM(SupplyChainData[TotalRevenue]) - SUM(SupplyChainData[Predicted_TotalRevenue])
+			
+			```
+		lineageTag: cbb19f05-4bed-418f-8d5d-c56bc0de1938
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Absolute Revenue Prediction Error' = ```
+			
+			AVERAGEX(
+			    SupplyChainData,
+			    ABS( SupplyChainData[TotalRevenue] - SupplyChainData[Predicted_TotalRevenue] )
+			)
+			
+			```
+		lineageTag: 53ee7c01-7d6e-4880-b423-126f44e57a41
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue MAPE' = ```
+			
+			DIVIDE(
+			    AVERAGEX(
+			        SupplyChainData,
+			        ABS( SupplyChainData[TotalRevenue] - SupplyChainData[Predicted_TotalRevenue] )
+			    ),
+			    AVERAGE(SupplyChainData[TotalRevenue]),
+			    0 -- Return 0 if denominator is zero to avoid errors
+			)
+			
+			```
+		lineageTag: 69b0cfde-5386-4351-8242-89995e962917
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Order Quantity Prediction Error' = SUM(SupplyChainData[OrderQuantity]) - SUM(SupplyChainData[Predicted_OrderQuantity])
+		lineageTag: 93868d00-43a0-4c65-8c89-6f55a1afc3bb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Absolute Order Quantity Prediction Error' =
+			
+			AVERAGEX(
+			    SupplyChainData,
+			    ABS( SupplyChainData[OrderQuantity] - SupplyChainData[Predicted_OrderQuantity] )
+			)
+		lineageTag: ac9b4c76-0a9c-4c10-be86-cccb33e2b4c5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Order Quantity MAPE' =
+			
+			DIVIDE(
+			    AVERAGEX(
+			        SupplyChainData,
+			        ABS( SupplyChainData[OrderQuantity] - SupplyChainData[Predicted_OrderQuantity] )
+			    ),
+			    AVERAGE(SupplyChainData[OrderQuantity]),
+			    0
+			)
+		lineageTag: 7aa5fb2b-5a9f-4cf7-b657-93672ac27ef8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Fuel Cost Prediction Error' = ```
+			SUM(SupplyChainData[FuelCostUSD]) - SUM(SupplyChainData[Predicted_FuelCostUSD])
+			
+			
+			
+			```
+		lineageTag: 73c9c093-a2aa-4c65-b649-e1dadc70d5d4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Absolute Fuel Cost Prediction Error' =
+			
+			AVERAGEX(
+			    SupplyChainData,
+			    ABS( SupplyChainData[FuelCostUSD] - SupplyChainData[Predicted_FuelCostUSD] )
+			)
+		lineageTag: 425c3a55-b75a-46f2-9366-03ce2c5f9414
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Fuel Cost MAPE' =
+			
+			DIVIDE(
+			    AVERAGEX(
+			        SupplyChainData,
+			        ABS( SupplyChainData[FuelCostUSD] - SupplyChainData[Predicted_FuelCostUSD] )
+			    ),
+			    AVERAGE(SupplyChainData[FuelCostUSD]),
+			    0
+			)
+		lineageTag: 7c8ca289-1a5f-4be0-bd82-c38bcd5f5124
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Route Duration Prediction Error' = ```
+			SUM(SupplyChainData[RouteDurationMinutes]) - SUM(SupplyChainData[Predicted_RouteDurationMinutes])
+			
+			```
+		lineageTag: d3c90e13-90d5-41c5-b3b3-4a3274c253c3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Absolute Route Duration Prediction Error' =
+			
+			AVERAGEX(
+			    SupplyChainData,
+			    ABS( SupplyChainData[RouteDurationMinutes] - SupplyChainData[Predicted_RouteDurationMinutes] )
+			)
+		lineageTag: b149ac7d-2962-4580-a59a-9a2e08bd4daa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Route Duration MAPE' =
+			
+			DIVIDE(
+			    AVERAGEX(
+			        SupplyChainData,
+			        ABS( SupplyChainData[RouteDurationMinutes] - SupplyChainData[Predicted_RouteDurationMinutes] )
+			    ),
+			    AVERAGE(SupplyChainData[RouteDurationMinutes]),
+			    0
+			)
+		lineageTag: 8e492068-60c1-4938-bdc7-7a9b6f7e4c31
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Carbon Footprint Prediction Error' = SUM(SupplyChainData[CarbonFootprintKG]) - SUM(SupplyChainData[Predicted_CarbonFootprintKG])
+		lineageTag: dacdd2e8-edba-43c3-80e4-70e35f6d7c5b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Absolute Carbon Footprint Prediction Error' = ```
+			
+			AVERAGEX(
+			    SupplyChainData,
+			    ABS( SupplyChainData[CarbonFootprintKG] - SupplyChainData[Predicted_CarbonFootprintKG] )
+			)
+			
+			```
+		lineageTag: a3815c8a-8cfa-411d-acba-4570135b33a1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Carbon Footprint MAPE' =
+			
+			DIVIDE(
+			    AVERAGEX(
+			        SupplyChainData,
+			        ABS( SupplyChainData[CarbonFootprintKG] - SupplyChainData[Predicted_CarbonFootprintKG] )
+			    ),
+			    AVERAGE(SupplyChainData[CarbonFootprintKG]),
+			    0
+			)
+		lineageTag: 076bbf73-4d39-4d37-861a-bbca59dad221
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		formatString: 0
+		lineageTag: 7b763054-d32a-46ad-a0b0-1b83a7c3684c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 5d66c4a2544b4c488307a141e99e345e
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

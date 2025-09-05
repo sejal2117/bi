@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Source Metadata",
+  "type": "object",
+  "properties": {
+    "source": { "type": "string" },
+    "universes": { "type": "array", "items": { "type": "object", "properties": { "name": {"type":"string"} }, "required": ["name"] } },
+    "dimensions": { "type": "array", "items": { "type": "object", "properties": { "name":{"type":"string"}, "type":{"type":"string"}, "path":{"type":"string"} }, "required":["name"] } },
+    "measures": { "type": "array", "items": { "type": "object", "properties": { "name":{"type":"string"}, "agg":{"type":"string"}, "source":{"type":"string"} }, "required":["name"] } },
+    "prompts":  { "type": "array", "items": { "type": "object", "properties": { "name":{"type":"string"}, "type":{"type":"string"} }, "required":["name"] } },
+    "lineage":  { "type": "array", "items": { "type": "object", "properties": { "from":{"type":"string"}, "to":{"type":"string"} } } }
+  },
+  "required": ["source"]
+}

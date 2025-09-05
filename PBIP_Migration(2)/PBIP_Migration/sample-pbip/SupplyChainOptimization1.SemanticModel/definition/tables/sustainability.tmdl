@@ -1,0 +1,60 @@
+table sustainability
+	lineageTag: 8dd6d403-dc61-44e1-aa0e-8eb3326d1e62
+
+	column RouteID
+		dataType: string
+		lineageTag: 82acbea1-a11f-4d0c-bb3d-38be84f7fcf5
+		summarizeBy: none
+		sourceColumn: RouteID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PredefinedRouteName
+		dataType: string
+		lineageTag: 676619b4-778f-48a1-ad6d-89b14e4615de
+		summarizeBy: none
+		sourceColumn: PredefinedRouteName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: string
+		lineageTag: 64526ba8-5a82-4e7b-9e13-568cfc2abffe
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column ElectricityConsumption_kWh
+		dataType: int64
+		formatString: 0
+		lineageTag: c02d3c89-f5e2-4d38-8d02-bef6a725348d
+		summarizeBy: sum
+		sourceColumn: ElectricityConsumption_kWh
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scope2Emissions_kgCO2e
+		dataType: double
+		lineageTag: c4f1ee52-0a05-46f5-ab7b-3c8766e2ca3e
+		summarizeBy: sum
+		sourceColumn: Scope2Emissions_kgCO2e
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition sustainability = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\DAHMAD\Downloads\sustainability.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"RouteID", type text}, {"PredefinedRouteName", type text}, {"Date", type text}, {"ElectricityConsumption_kWh", Int64.Type}, {"Scope2Emissions_kgCO2e", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

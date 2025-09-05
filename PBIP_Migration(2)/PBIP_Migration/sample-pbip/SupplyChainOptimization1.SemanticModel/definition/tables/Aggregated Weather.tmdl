@@ -1,0 +1,65 @@
+table 'Aggregated Weather'
+	lineageTag: a8ef6328-0ac4-499f-b789-a5a109daf8e0
+
+	column RouteID
+		dataType: string
+		lineageTag: e9625adb-ece1-4b3f-ba3b-15d710c016e1
+		summarizeBy: none
+		sourceColumn: RouteID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Average Temperature'
+		dataType: double
+		lineageTag: b68dce45-05b1-4823-97c5-b7f1f9b7fc43
+		summarizeBy: sum
+		sourceColumn: Average Temperature
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Max Wind Speed'
+		dataType: double
+		lineageTag: bbe65aab-a67c-45ad-a2da-41a17a886a0f
+		summarizeBy: sum
+		sourceColumn: Max Wind Speed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Precipitation'
+		dataType: double
+		lineageTag: 4f83e3b0-c1b4-423e-b818-28154856b0ce
+		summarizeBy: sum
+		sourceColumn: Total Precipitation
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Forecast Count'
+		dataType: int64
+		formatString: 0
+		lineageTag: eb7d1973-cf0f-4eda-bd86-6df358b38a39
+		summarizeBy: sum
+		sourceColumn: Forecast Count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Aggregated Weather' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\DAHMAD\Downloads\FinalSupplyChain\Supply_B\supply_chain_data_raw\weather_data.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"WeatherLookupID", type text}, {"RouteID", type text}, {"PredefinedRouteName", type text}, {"LookupDateTimeUTC", type datetime}, {"ForecastDateTimeUTC", type datetime}, {"WeatherDescription", type text}, {"TemperatureCelsius", type number}, {"WindSpeedMetersSec", type number}, {"PrecipitationMM3Hr", type number}}),
+				    #"Grouped Rows" = Table.Group(#"Changed Type", {"RouteID"}, {{"Average Temperature", each List.Average([TemperatureCelsius]), type nullable number}, {"Max Wind Speed", each List.Max([WindSpeedMetersSec]), type nullable number}, {"Total Precipitation", each List.Sum([PrecipitationMM3Hr]), type nullable number}, {"Forecast Count", each Table.RowCount(_), Int64.Type}})
+				in
+				    #"Grouped Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

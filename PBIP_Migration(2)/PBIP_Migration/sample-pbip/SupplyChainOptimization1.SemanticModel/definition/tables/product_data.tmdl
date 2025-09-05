@@ -1,0 +1,108 @@
+table product_data
+	lineageTag: 83734b1b-bd6f-4c08-b1d5-4ab23f7056cd
+
+	column ProductID
+		dataType: string
+		lineageTag: f28582d9-f98d-4c2d-b7d8-1ea9ac99ec06
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: f4056e34-a7b0-4757-b914-9456588bb07c
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Supplier
+		dataType: string
+		lineageTag: 6a235e62-2dfd-4d3c-ad16-4459aeeaae6c
+		summarizeBy: none
+		sourceColumn: Supplier
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: b3c1b0cb-e3eb-4798-a094-bc0cefa38636
+		summarizeBy: sum
+		sourceColumn: OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: double
+		lineageTag: 64374596-07e8-4b6c-b561-dc3b6f74db15
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OrderDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 220b9eed-0c71-490e-b389-0bab09a2f39d
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		variation Variation
+			isDefault
+			relationship: 4d47dcd8-45f3-49e7-952f-e9c2bd7beb6b
+			defaultHierarchy: LocalDateTable_912f8432-d929-44ce-ad48-6afde03801c7.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LocationID
+		dataType: string
+		lineageTag: e2c9b5b1-9e43-4253-8d1b-6e2ec49fb7ad
+		summarizeBy: none
+		sourceColumn: LocationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FuelID
+		dataType: string
+		lineageTag: d2b092bc-a00e-4526-82d1-816d9d9b10e7
+		summarizeBy: none
+		sourceColumn: FuelID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RouteID
+		dataType: string
+		lineageTag: 4b80a556-3655-43bc-aa8a-ff6f0027cc28
+		summarizeBy: none
+		sourceColumn: RouteID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PredefinedRouteName
+		dataType: string
+		lineageTag: c35bdfa5-2ac3-4ab4-88e1-4fb793048b6c
+		summarizeBy: none
+		sourceColumn: PredefinedRouteName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition product_data = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\DAHMAD\Downloads\FinalSupplyChain\Supply_B\supply_chain_data_raw\product_data.csv"),[Delimiter=",", Columns=10, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ProductID", type text}, {"Category", type text}, {"Supplier", type text}, {"OrderQuantity", Int64.Type}, {"UnitPrice", type number}, {"OrderDate", type date}, {"LocationID", type text}, {"FuelID", type text}, {"RouteID", type text}, {"PredefinedRouteName", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

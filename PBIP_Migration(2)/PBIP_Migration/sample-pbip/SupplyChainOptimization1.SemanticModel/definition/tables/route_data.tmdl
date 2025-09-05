@@ -1,0 +1,93 @@
+table route_data
+	lineageTag: 6aa99acd-c413-4ea6-b212-f344ac35e658
+
+	column RouteID
+		dataType: string
+		lineageTag: 3a408dce-3d4d-4f8e-a0a0-7eacb322f3eb
+		summarizeBy: none
+		sourceColumn: RouteID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PredefinedRouteName
+		dataType: string
+		lineageTag: 97f78c2e-4ffd-4ef1-a41c-4c27324e6936
+		summarizeBy: none
+		sourceColumn: PredefinedRouteName
+
+		annotation SummarizationSetBy = Automatic
+
+	column OriginLatitude
+		dataType: double
+		lineageTag: b8f9d8df-34eb-4582-9946-f08e404db0c8
+		summarizeBy: sum
+		sourceColumn: OriginLatitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OriginLongitude
+		dataType: double
+		lineageTag: 119eec26-e976-4b46-a6de-35477c2f1bf0
+		summarizeBy: sum
+		sourceColumn: OriginLongitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DestinationLatitude
+		dataType: double
+		lineageTag: a91a3730-d8b4-42a9-8996-3eb89142d1a6
+		summarizeBy: sum
+		sourceColumn: DestinationLatitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DestinationLongitude
+		dataType: double
+		lineageTag: 37078ec5-b5c1-493b-b9ff-1cad989a446a
+		summarizeBy: sum
+		sourceColumn: DestinationLongitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RouteDistanceKM
+		dataType: double
+		lineageTag: 4aa16155-7ea1-49ad-bf1d-d7d7326d0fe0
+		summarizeBy: sum
+		sourceColumn: RouteDistanceKM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RouteDurationMinutes
+		dataType: double
+		lineageTag: e4f18dd6-9c76-4ae4-ad6a-c1eab9d2a136
+		summarizeBy: sum
+		sourceColumn: RouteDurationMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition route_data = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\DAHMAD\Downloads\FinalSupplyChain\Supply_B\supply_chain_data_raw\route_data.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"RouteID", type text}, {"PredefinedRouteName", type text}, {"OriginLatitude", type number}, {"OriginLongitude", type number}, {"DestinationLatitude", type number}, {"DestinationLongitude", type number}, {"RouteDistanceKM", type number}, {"RouteDurationMinutes", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

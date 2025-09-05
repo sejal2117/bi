@@ -1,0 +1,61 @@
+{
+  "name": "Executive",
+  "displayName": "Executive",
+  "order": 0,
+  "layout": {
+    "width": 1280,
+    "height": 720
+  },
+  "visuals": [
+    {
+      "name": "v1",
+      "type": "shape:rectangle",
+      "title": "Header",
+      "x": 41.666666666666664,
+      "y": 0,
+      "width": 916.6666666666666,
+      "height": 96,
+      "binding": null
+    },
+    {
+      "name": "v2",
+      "type": "card",
+      "title": "Revenue",
+      "x": 41.666666666666664,
+      "y": 128,
+      "width": 250,
+      "height": 128,
+      "binding": "[PlaceholderRevenue]"
+    },
+    {
+      "name": "v3",
+      "type": "card",
+      "title": "Orders",
+      "x": 333.3333333333333,
+      "y": 128,
+      "width": 250,
+      "height": 128,
+      "binding": "[Count]"
+    },
+    {
+      "name": "v4",
+      "type": "chart:bar",
+      "title": "Sales by Region",
+      "x": 41.666666666666664,
+      "y": 288,
+      "width": 458.3333333333333,
+      "height": 256,
+      "binding": null
+    },
+    {
+      "name": "v5",
+      "type": "chart:line",
+      "title": "Trend",
+      "x": 541.6666666666666,
+      "y": 288,
+      "width": 416.66666666666663,
+      "height": 256,
+      "binding": null
+    }
+  ]
+}

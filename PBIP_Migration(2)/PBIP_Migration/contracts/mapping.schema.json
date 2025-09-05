@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Field Mapping",
+  "type": "object",
+  "properties": {
+    "tableMap":   { "type": "array", "items": { "type": "object", "properties": { "source":{"type":"string"}, "target":{"type":"string"} }, "required":["source","target"] } },
+    "columnMap":  { "type": "array", "items": { "type": "object", "properties": { "source":{"type":"string"}, "target":{"type":"string"} }, "required":["source","target"] } },
+    "parameterMap": { "type": "array", "items": { "type": "object", "properties": { "sourcePrompt":{"type":"string"}, "targetParam":{"type":"string"} }, "required":["sourcePrompt","targetParam"] } },
+    "rls":        { "type": "array", "items": { "type": "object", "properties": { "role":{"type":"string"}, "filter":{"type":"string"} }, "required":["role","filter"] } }
+  }
+}

@@ -1,0 +1,59 @@
+table fuel_price_data
+	lineageTag: 34739b5f-893b-419b-9f3b-fc83e49dafd2
+
+	column FuelID
+		dataType: string
+		lineageTag: a2136378-c993-4e8f-bb10-ff88d246c76d
+		summarizeBy: none
+		sourceColumn: FuelID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FuelPriceUSDPerGallon
+		dataType: double
+		lineageTag: 986a284f-fa71-4880-b176-bb91da9f5064
+		summarizeBy: sum
+		sourceColumn: FuelPriceUSDPerGallon
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FuelPriceDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1ff05f11-9fd2-4294-98c8-e8e2f320f1ea
+		summarizeBy: none
+		sourceColumn: FuelPriceDate
+
+		variation Variation
+			isDefault
+			relationship: 230717d1-d840-4e98-ab49-4f891213793b
+			defaultHierarchy: LocalDateTable_235b17fc-65ff-488f-96fe-84e39b9150fe.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column OriginCountry
+		dataType: string
+		lineageTag: 1880dafe-6464-4ae8-ab5d-051d0ce5c823
+		summarizeBy: none
+		sourceColumn: OriginCountry
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fuel_price_data = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\DAHMAD\Downloads\FinalSupplyChain\Supply_B\supply_chain_data_raw\fuel_price_data.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"FuelID", type text}, {"FuelPriceUSDPerGallon", type number}, {"FuelPriceDate", type date}, {"OriginCountry", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

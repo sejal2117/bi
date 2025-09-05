@@ -1,0 +1,22 @@
+{
+  "projectName": "WF_Executive",
+  "thinReport": false,
+  "autoCompile": true,
+  "theme": {
+    "name": "Wireframe Theme",
+    "dataColors": ["#4e79a7", "#f28e2b", "#e15759", "#76b7b2"],
+    "background": "#ffffff",
+    "foreground": "#222222"
+  },
+  "pages": [
+    {
+      "name": "Executive",
+      "visuals": [
+        { "type": "shape:rectangle", "title": "Header", "x": 24, "y": 24, "w": 1232, "h": 72 },
+        { "type": "card", "title": "Revenue", "binding": "[PlaceholderRevenue]", "x": 32, "y": 120, "w": 220, "h": 120 },
+        { "type": "card", "title": "Orders",  "binding": "[Count]",              "x": 268, "y": 120, "w": 220, "h": 120 },
+        { "type": "shape:rectangle", "title": "Chart Placeholder", "x": 32, "y": 264, "w": 600, "h": 360 }
+      ]
+    }
+  ]
+}

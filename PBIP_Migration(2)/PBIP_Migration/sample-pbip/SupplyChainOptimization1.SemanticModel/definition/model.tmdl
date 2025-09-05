@@ -1,0 +1,38 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["fuel_price_data","location_data","SupplyChainData","route_data","Aggregated Weather","product_data","weather_data","alternative_routes_suggestions","sustainability"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.146.1254.0 (25.08)+791a7518fadc83da883d79322a2658aff57c8db3
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fuel_price_data
+ref table DateTableTemplate_18db3432-331c-4445-b5eb-7440df095116
+ref table LocalDateTable_235b17fc-65ff-488f-96fe-84e39b9150fe
+ref table location_data
+ref table SupplyChainData
+ref table route_data
+ref table 'Aggregated Weather'
+ref table product_data
+ref table LocalDateTable_912f8432-d929-44ce-ad48-6afde03801c7
+ref table weather_data
+ref table LocalDateTable_bd98343a-5b46-44dd-911b-5ea81146bde0
+ref table LocalDateTable_77d701e0-2962-4056-875d-183b9653140a
+ref table alternative_routes_suggestions
+ref table LocalDateTable_d166f3f2-a2dd-45e2-9922-2282624a81ce
+ref table LocalDateTable_58dcf891-0a05-4669-ae66-e6e5db9aeb2c
+ref table LocalDateTable_4afe4ae8-8445-4022-b3f9-9c61a16a2eab
+ref table _Measures
+ref table 'Calculated Measures'
+ref table sustainability
+
+ref cultureInfo en-US
+

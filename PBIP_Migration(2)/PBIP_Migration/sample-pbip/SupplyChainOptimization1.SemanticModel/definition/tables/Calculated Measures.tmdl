@@ -1,0 +1,129 @@
+table 'Calculated Measures'
+	lineageTag: 89463ea4-4ec0-47e3-8446-a27b75c2c750
+
+	measure 'Total Orders' = SUM('SupplyChainData'[OrderQuantity])
+		formatString: 0
+		lineageTag: cd5ee112-004b-4395-ad75-276c87d8fc66
+
+	measure Measure
+		lineageTag: 61e1a190-c4ab-4d4d-a067-f8d655cfb6ba
+
+		annotation 43dbc3e8-3a1c-4b6f-9923-b49ff7d6691c = True
+
+	measure 'Total Fuel Consumed' = SUM('SupplyChainData'[EstimatedFuelConsumedGallons])
+		lineageTag: 7a291047-1963-45a0-a080-da9df2072da0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Fuel Efficiency (Miles per gallon)' = DIVIDE(SUM('SupplyChainData'[RouteDistanceMiles]),SUM('SupplyChainData'[EstimatedFuelConsumedGallons]))
+		lineageTag: 89b4c607-83ee-4e7d-8b70-c04c55aaf7b9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Carbon Footprints' = SUM(('SupplyChainData'[CarbonFootprintKG]))
+		lineageTag: 64bef853-a994-47a4-9517-39b3ff769b8e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Distance (KM)' = SUM('SupplyChainData'[RouteDistanceKM])
+		lineageTag: 0c9a62bd-de31-48ac-ac59-f48370ce0c9a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Route Distance (Minutes)' = AVERAGE(SupplyChainData[RouteDurationMinutes])
+		lineageTag: 98d5f512-3fd9-4d97-930d-1b273a090dc7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Speed (Km/hr)' = DIVIDE(SUM(SupplyChainData[RouteDistanceKM]),(SUM(SupplyChainData[RouteDurationMinutes])/60))
+		lineageTag: 1a4da657-099d-4041-9ee5-1055a2d222ee
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Fuel Cost per KM' = DIVIDE(SUM(SupplyChainData[FuelCostUSD]),SUM(SupplyChainData[RouteDistanceKM]))
+		lineageTag: 5541b026-07df-4bdd-b08e-680466ad9060
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Fuel Consumed (Litres)' = [Total Fuel Consumed] * 3.78541
+		lineageTag: 1f19bae1-9992-4f67-b8b1-7c1dad2e5015
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Fuel Efficiency (KMPL)' = DIVIDE([Total Distance (km)],[Total Fuel Consumed (Litres)])
+		lineageTag: bbf41771-288e-45cb-9a26-a9c6ecb6fae5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Tempearture (C)' = AVERAGEX(VALUES('weather_data'[PredefinedRouteName]), CALCULATE(AVERAGE('weather_data'[TemperatureCelsius])))
+		lineageTag: daec95b3-6176-4ad4-8288-06bcbe3f22af
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Precipitation (mm)' = SUM('weather_data'[PrecipitationMM3Hr])
+		lineageTag: 61f93c23-fc3e-4e13-be7a-4871c87785d1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Wind Speed (m/s)' = AVERAGE(('weather_data'[WindSpeedMetersSec]))
+		lineageTag: 6cf0dacf-cd11-4ce6-b546-042e2b167727
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lastest Fuel Price' = CALCULATE(MAX('fuel_price_data'[FuelPriceUSDPerGallon]),TOPN(1,'fuel_price_data','fuel_price_data'[FuelPriceDate],DESC))
+		lineageTag: f31c7ffa-bcfc-4b8a-8389-0ceef79399af
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Weather Impact Score' = ([Average Tempearture (C)] * 0.2) + ([Total Precipitation (mm)] * 0.5) + ([Average Wind Speed (m/s)] * 0.3)
+		lineageTag: 626039ad-4a7f-4e81-95ac-131277fb1b8a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Electricity Consumption (kWh)' = SUM('sustainability'[ElectricityConsumption_kWh])
+		formatString: 0
+		lineageTag: 32bb64d6-f8f5-4b03-8b4f-2f63b646b8b4
+
+	measure 'Total Scope 2 Emissions (kg CO2e)' = SUM('sustainability'[Scope2Emissions_kgCO2e])
+		lineageTag: 76063f24-af59-4015-a075-a2ddceb39877
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Electricity Consumption per Route (kWh)' = AVERAGE('sustainability'[ElectricityConsumption_kWh])
+		lineageTag: a1e9a000-7047-4199-b72a-2b047ba2d57d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Scope 2 Emissions per Route (kg CO2e)' = AVERAGE('sustainability'[Scope2Emissions_kgCO2e])
+		lineageTag: afc71cbc-54ac-4c44-af49-27ac364a509a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Routes with Bad Weather' = DIVIDE(SUM(weather_data[Bad Weather Flag]),DISTINCTCOUNT(weather_data[RouteID]),0)*100
+		lineageTag: 41edba3e-6fdd-422e-a765-32a601afb238
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Carbon Footprint (Tons)' = [Total Carbon Footprint] / 1000
+		lineageTag: 6a5d1e5c-9aea-45b1-bbd5-259040518425
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 310609fc-f336-47a1-bad7-1b3a87043be8
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Calculated Measures' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = b02836adfd704ee3930bb114af03aacc
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

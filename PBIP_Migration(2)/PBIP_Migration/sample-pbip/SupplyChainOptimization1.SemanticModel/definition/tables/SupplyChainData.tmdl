@@ -1,0 +1,491 @@
+table SupplyChainData
+	lineageTag: 1fe6e338-2d46-46cb-bd77-485023869d17
+
+	column ProductID
+		dataType: string
+		lineageTag: f3d6b393-1e86-46ef-8e47-5c626f1973a2
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 6411b9a0-0873-49ab-87b8-eca8d7c81ae1
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Supplier
+		dataType: string
+		lineageTag: 05860b9c-ea7e-4255-befd-12c639800537
+		summarizeBy: none
+		sourceColumn: Supplier
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 6c78da3a-d0b5-450b-a8ec-6a29f376be3a
+		summarizeBy: sum
+		sourceColumn: OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: double
+		lineageTag: 6ff0be20-173a-46a7-a73f-bea29983473a
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OrderDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8f6ea478-7bd2-4251-9bfd-05a850c9da42
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		variation Variation
+			isDefault
+			relationship: c675421a-7d9e-4255-930e-daa900e0d75c
+			defaultHierarchy: LocalDateTable_58dcf891-0a05-4669-ae66-e6e5db9aeb2c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LocationID
+		dataType: string
+		lineageTag: ba43e28b-6e60-47eb-9d72-c50279a07cfe
+		summarizeBy: none
+		sourceColumn: LocationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FuelID
+		dataType: string
+		lineageTag: 54de0cde-ce9e-4262-8ff7-ae06dc07a537
+		summarizeBy: none
+		sourceColumn: FuelID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RouteID
+		dataType: string
+		lineageTag: ec4b9578-e863-47df-8c08-efd63009567c
+		summarizeBy: none
+		sourceColumn: RouteID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PredefinedRouteName
+		dataType: string
+		lineageTag: 27203ffd-8e20-4ad7-9ed7-24cf4eda9bbf
+		summarizeBy: none
+		sourceColumn: PredefinedRouteName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 4d7a78c0-c969-4088-9179-3c4ba1c4a463
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 81233da0-2274-4524-b649-260fc2770ff1
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: acac0b3e-e9bf-412b-a36e-51d0f13b0fc0
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Zipcode
+		dataType: string
+		lineageTag: ba2a5947-4dd3-443f-a9ba-44f89e512538
+		summarizeBy: none
+		sourceColumn: Zipcode
+
+		annotation SummarizationSetBy = Automatic
+
+	column FuelPriceUSDPerGallon
+		dataType: double
+		lineageTag: a831443c-9ac2-47ed-aca6-7a6726267776
+		summarizeBy: sum
+		sourceColumn: FuelPriceUSDPerGallon
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FuelPriceDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fe1b1265-0240-45f2-8a60-ccd357927229
+		summarizeBy: none
+		sourceColumn: FuelPriceDate
+
+		variation Variation
+			isDefault
+			relationship: 37d92f0a-7601-44e8-b549-013360775c7c
+			defaultHierarchy: LocalDateTable_4afe4ae8-8445-4022-b3f9-9c61a16a2eab.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column OriginCountry
+		dataType: string
+		lineageTag: 4412a490-e730-48fd-a0fd-a35f4a974aed
+		summarizeBy: none
+		sourceColumn: OriginCountry
+
+		annotation SummarizationSetBy = Automatic
+
+	column OriginLatitude
+		dataType: double
+		lineageTag: 6ccbd7a0-001e-4866-972a-79a6efd82e15
+		summarizeBy: sum
+		sourceColumn: OriginLatitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OriginLongitude
+		dataType: double
+		lineageTag: aea4e7c3-8f00-4abb-b136-d8077e34bea8
+		summarizeBy: sum
+		sourceColumn: OriginLongitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DestinationLatitude
+		dataType: double
+		lineageTag: 3a5ea599-0e4b-4702-9c53-25127ed36be7
+		summarizeBy: sum
+		sourceColumn: DestinationLatitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DestinationLongitude
+		dataType: double
+		lineageTag: 6abdcab5-903a-4abf-82c4-8018ea642335
+		summarizeBy: sum
+		sourceColumn: DestinationLongitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RouteDistanceKM
+		dataType: double
+		lineageTag: e1af1b6d-5227-4f7e-9381-2087153b7f0f
+		summarizeBy: sum
+		sourceColumn: RouteDistanceKM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RouteDurationMinutes
+		dataType: double
+		lineageTag: 0ce57866-a86b-429a-bd6b-c06f5080e910
+		summarizeBy: sum
+		sourceColumn: RouteDurationMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AvgTemperatureCelsius
+		dataType: double
+		lineageTag: e60eaf68-982d-4b1f-9b86-f1a54592fc4c
+		summarizeBy: sum
+		sourceColumn: AvgTemperatureCelsius
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MaxWindSpeedMetersSec
+		dataType: double
+		lineageTag: 77fa5daf-0b92-4511-b0a9-c3cf78818d96
+		summarizeBy: sum
+		sourceColumn: MaxWindSpeedMetersSec
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalPrecipitationMM
+		dataType: double
+		lineageTag: a73ae8e8-34e3-4d42-8458-6712bb451cc7
+		summarizeBy: sum
+		sourceColumn: TotalPrecipitationMM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WeatherForecastCount
+		dataType: int64
+		formatString: 0
+		lineageTag: b7eb8bb9-ca05-44ea-a668-84f04922715b
+		summarizeBy: sum
+		sourceColumn: WeatherForecastCount
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 7ceaaff2-a3fc-49fc-bfe4-930e1648f596
+		summarizeBy: sum
+		sourceColumn: OrderYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: b71efb98-a2b0-4109-8d20-d05ecf708953
+		summarizeBy: sum
+		sourceColumn: OrderMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDayOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: e4dc663d-be12-43ca-a97f-614b22dfcf68
+		summarizeBy: sum
+		sourceColumn: OrderDayOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDayName
+		dataType: string
+		lineageTag: e7311512-5180-4206-8223-f928f0367643
+		summarizeBy: none
+		sourceColumn: OrderDayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDayOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 06940087-355b-4d09-82c0-7e142e744f9a
+		summarizeBy: sum
+		sourceColumn: OrderDayOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column RouteDistanceMiles
+		dataType: double
+		lineageTag: dd567a4c-7f57-4b81-a406-78925e880c81
+		summarizeBy: sum
+		sourceColumn: RouteDistanceMiles
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EstimatedFuelConsumedGallons
+		dataType: double
+		lineageTag: e9909098-aef5-4de4-9f5d-81b9c369687d
+		summarizeBy: sum
+		sourceColumn: EstimatedFuelConsumedGallons
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FuelCostUSD
+		dataType: double
+		lineageTag: f3bd4253-dc3d-4ab6-a28c-7f27bba6cf3f
+		summarizeBy: sum
+		sourceColumn: FuelCostUSD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CarbonFootprintKG
+		dataType: double
+		lineageTag: 8ca1193b-f448-4b9e-a1eb-2d83eec99741
+		summarizeBy: sum
+		sourceColumn: CarbonFootprintKG
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalRevenue
+		dataType: double
+		lineageTag: b9e0df99-656f-4335-9ec5-b06fbd90c285
+		summarizeBy: sum
+		sourceColumn: TotalRevenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Predicted_OrderQuantity
+		dataType: double
+		lineageTag: 2ed092e0-f28d-41d1-be01-96dd62f99f52
+		summarizeBy: sum
+		sourceColumn: Predicted_OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Prediction_Error_OrderQuantity
+		dataType: string
+		lineageTag: 7b39f08b-3348-4df7-b631-713d5ad776d2
+		summarizeBy: none
+		sourceColumn: Prediction_Error_OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Predicted_RouteDurationMinutes
+		dataType: double
+		lineageTag: 75fd7c14-17d5-435f-95dd-b21db7011cf5
+		summarizeBy: sum
+		sourceColumn: Predicted_RouteDurationMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Prediction_Error_RouteDurationMinutes
+		dataType: string
+		lineageTag: 8d9fad61-7eb6-4702-88a3-90ef0c5849ae
+		summarizeBy: none
+		sourceColumn: Prediction_Error_RouteDurationMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Predicted_FuelCostUSD
+		dataType: double
+		lineageTag: a5e99f01-0659-41d9-b968-dba8f7a2dfe8
+		summarizeBy: sum
+		sourceColumn: Predicted_FuelCostUSD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Prediction_Error_FuelCostUSD
+		dataType: string
+		lineageTag: 5e1eff86-9007-4588-8ca4-b12cf5112e06
+		summarizeBy: none
+		sourceColumn: Prediction_Error_FuelCostUSD
+
+		annotation SummarizationSetBy = Automatic
+
+	column Predicted_CarbonFootprintKG
+		dataType: double
+		lineageTag: a733089a-ca7a-4afa-8ebf-166ad73efd5e
+		summarizeBy: sum
+		sourceColumn: Predicted_CarbonFootprintKG
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Prediction_Error_CarbonFootprintKG
+		dataType: string
+		lineageTag: 7d0e53e8-6257-4758-aef3-432b9c06a2fb
+		summarizeBy: none
+		sourceColumn: Prediction_Error_CarbonFootprintKG
+
+		annotation SummarizationSetBy = Automatic
+
+	column Predicted_TotalRevenue
+		dataType: double
+		lineageTag: 13f57228-7283-42b1-8538-7e98c7d4b690
+		summarizeBy: sum
+		sourceColumn: Predicted_TotalRevenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Prediction_Error_TotalRevenue
+		dataType: string
+		lineageTag: 36b7bdfb-3339-4d07-af03-1aaccfad383b
+		summarizeBy: none
+		sourceColumn: Prediction_Error_TotalRevenue
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SupplyChainData = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\DAHMAD\Downloads\FinalSupplyChain\Supply_B\supply_chain_data_raw\product_data.csv"),[Delimiter=",", Columns=10, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ProductID", type text}, {"Category", type text}, {"Supplier", type text}, {"OrderQuantity", Int64.Type}, {"UnitPrice", type number}, {"OrderDate", type date}, {"LocationID", type text}, {"FuelID", type text}, {"RouteID", type text}, {"PredefinedRouteName", type text}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"LocationID"}, location_data, {"LocationID"}, "location_data", JoinKind.LeftOuter),
+				    #"Expanded location_data" = Table.ExpandTableColumn(#"Merged Queries", "location_data", {"Country", "State", "City", "Zipcode"}, {"Country", "State", "City", "Zipcode"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Expanded location_data", {"FuelID"}, fuel_price_data, {"FuelID"}, "fuel_price_data", JoinKind.LeftOuter),
+				    #"Expanded fuel_price_data" = Table.ExpandTableColumn(#"Merged Queries1", "fuel_price_data", {"FuelPriceUSDPerGallon", "FuelPriceDate", "OriginCountry"}, {"FuelPriceUSDPerGallon", "FuelPriceDate", "OriginCountry"}),
+				    #"Merged Queries2" = Table.NestedJoin(#"Expanded fuel_price_data", {"RouteID"}, route_data, {"RouteID"}, "route_data", JoinKind.LeftOuter),
+				    #"Expanded route_data" = Table.ExpandTableColumn(#"Merged Queries2", "route_data", {"OriginLatitude", "OriginLongitude", "DestinationLatitude", "DestinationLongitude", "RouteDistanceKM", "RouteDurationMinutes"}, {"OriginLatitude", "OriginLongitude", "DestinationLatitude", "DestinationLongitude", "RouteDistanceKM", "RouteDurationMinutes"}),
+				    #"Merged Queries3" = Table.NestedJoin(#"Expanded route_data", {"RouteID"}, #"Aggregated Weather", {"RouteID"}, "Aggregated Weather", JoinKind.LeftOuter),
+				    #"Expanded Aggregated Weather" = Table.ExpandTableColumn(#"Merged Queries3", "Aggregated Weather", {"Average Temperature", "Max Wind Speed", "Total Precipitation", "Forecast Count"}, {"Aggregated Weather.Average Temperature", "Aggregated Weather.Max Wind Speed", "Aggregated Weather.Total Precipitation", "Aggregated Weather.Forecast Count"}),
+				    #"Added Custom" = Table.AddColumn(#"Expanded Aggregated Weather", "OrderYear", each Date.Year([OrderDate])),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "OrderMonth", each Date.Month([OrderDate])),
+				    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "OrderDayOfWeek", each Date.DayOfWeek([OrderDate])),
+				    #"Added Custom3" = Table.AddColumn(#"Added Custom2", "OrderDayOfYear", each Date.DayOfYear([OrderDate])),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Custom3",{{"Aggregated Weather.Average Temperature", "AvgTemperatureCelsius"}, {"Aggregated Weather.Max Wind Speed", "MaxWindSpeedMetersSec"}, {"Aggregated Weather.Total Precipitation", "TotalPrecipitationMM"}, {"Aggregated Weather.Forecast Count", "WeatherForecastCount"}}),
+				    #"Inserted Year" = Table.AddColumn(#"Renamed Columns", "Year", each Date.Year([OrderDate]), Int64.Type),
+				    #"Inserted Month" = Table.AddColumn(#"Inserted Year", "Month", each Date.Month([OrderDate]), Int64.Type),
+				    #"Inserted Day of Week" = Table.AddColumn(#"Inserted Month", "Day of Week", each Date.DayOfWeek([OrderDate]), Int64.Type),
+				    #"Inserted Day Name" = Table.AddColumn(#"Inserted Day of Week", "Day Name", each Date.DayOfWeekName([OrderDate]), type text),
+				    #"Inserted Day of Year" = Table.AddColumn(#"Inserted Day Name", "Day of Year", each Date.DayOfYear([OrderDate]), Int64.Type),
+				    #"Removed Columns" = Table.RemoveColumns(#"Inserted Day of Year",{"OrderYear", "OrderMonth", "OrderDayOfWeek", "OrderDayOfYear"}),
+				    #"Added Custom4" = Table.AddColumn(#"Removed Columns", "RouteDistanceMiles", each [RouteDistanceKM] * 0.621371),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom4",{{"RouteDistanceMiles", type number}}),
+				    #"Added Custom5" = Table.AddColumn(#"Changed Type1", "EstimatedFuelConsumedGallons", each if [RouteDistanceMiles] > 0 and [RouteDistanceMiles] <> null then [RouteDistanceMiles] / 6.0 else null),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Added Custom5",{{"EstimatedFuelConsumedGallons", type number}}),
+				    #"Added Custom6" = Table.AddColumn(#"Changed Type2", "FuelCostUSD", each if [EstimatedFuelConsumedGallons] <> null and [FuelPriceUSDPerGallon] <> null then [EstimatedFuelConsumedGallons] * [FuelPriceUSDPerGallon] else null),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Added Custom6",{{"FuelCostUSD", type number}}),
+				    #"Added Custom7" = Table.AddColumn(#"Changed Type3", "CarbonFootprintKG", each if [EstimatedFuelConsumedGallons] <> null then [EstimatedFuelConsumedGallons] * 10.18 else null),
+				    #"Changed Type4" = Table.TransformColumnTypes(#"Added Custom7",{{"CarbonFootprintKG", type number}}),
+				    #"Added Custom8" = Table.AddColumn(#"Changed Type4", "TotalRevenue", each if [OrderQuantity] <> null and [UnitPrice] <> null then [OrderQuantity] * [UnitPrice] else null),
+				    #"Changed Type5" = Table.TransformColumnTypes(#"Added Custom8",{{"TotalRevenue", type number}}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Changed Type5",{{"Day of Week", "OrderDayOfWeek"}, {"Day of Year", "OrderDayOfYear"}, {"Month", "OrderMonth"}, {"Year", "OrderYear"}, {"Day Name", "OrderDayName"}}),
+				    #"Changed Type6" = Table.TransformColumnTypes(#"Renamed Columns1",{{"OrderDate", type text}, {"FuelPriceDate", type text}}),
+				    #"Run Python script" = Python.Execute("import pandas as pd#(lf)import numpy as np#(lf)import joblib#(lf)import os#(lf)#(lf)from sklearn.preprocessing import StandardScaler, OneHotEncoder#(lf)from sklearn.compose import ColumnTransformer#(lf)from sklearn.ensemble import RandomForestRegressor#(lf)#(lf)# --- CONFIGURATION ---#(lf)MODEL_SAVE_DIR = r""C:/Users/DAHMAD/Downloads/FinalSupplyChain/Supply_B/trained_models_separate_load""#(lf)TARGETS_TO_PREDICT = [#(lf)    'OrderQuantity',#(lf)    'RouteDurationMinutes',#(lf)    'FuelCostUSD',#(lf)    'CarbonFootprintKG',#(lf)    'TotalRevenue'#(lf)]#(lf)#(lf)print(f""Running Python script to predict targets: {TARGETS_TO_PREDICT}"")#(lf)print(f""Input dataset shape: {dataset.shape}"")#(lf)#(lf)# --- STEP 1: DEBUG RAW DATE COLUMNS ---#(lf)for col in ['OrderDate', 'FuelPriceDate']:#(lf)    if col in dataset.columns:#(lf)        print(f""\nSample values for '{col}':"")#(lf)        print(dataset[col].dropna().astype(str).unique()[:5])#(lf)    else:#(lf)        print(f""\nColumn '{col}' not found in dataset."")#(lf)#(lf)# --- STEP 2: Convert PeriodDtype columns (if any) ---#(lf)try:#(lf)    for col in dataset.select_dtypes(include=['period']).columns:#(lf)        print(f""Converting PeriodDtype column '{col}' to string."")#(lf)        dataset[col] = dataset[col].astype(str)#(lf)except Exception as period_error:#(lf)    print(f""Error converting PeriodDtype columns: {period_error}"")#(lf)#(lf)# --- STEP 3: Initialize Prediction Columns ---#(lf)for target in TARGETS_TO_PREDICT:#(lf)    dataset[f""Predicted_{target}""] = np.nan#(lf)    dataset[f""Prediction_Error_{target}""] = None#(lf)#(lf)# --- STEP 4: Run Model for Each Target ---#(lf)for target in TARGETS_TO_PREDICT:#(lf)    print(f""\n--- Predicting: {target} ---"")#(lf)    #(lf)    model_file = os.path.join(MODEL_SAVE_DIR, f""model_{target}.joblib"")#(lf)    preproc_file = os.path.join(MODEL_SAVE_DIR, f""preprocessor_{target}.joblib"")#(lf)    feat_file = os.path.join(MODEL_SAVE_DIR, f""features_{target}.joblib"")#(lf)#(lf)    prediction_col = f""Predicted_{target}""#(lf)    error_col = f""Prediction_Error_{target}""#(lf)#(lf)    if not all(os.path.exists(p) for p in [model_file, preproc_file, feat_file]):#(lf)        dataset[error_col] = f""Missing file(s) for {target}""#(lf)        continue#(lf)#(lf)    try:#(lf)        model = joblib.load(model_file)#(lf)        preproc = joblib.load(preproc_file)#(lf)        feat_info = joblib.load(feat_file)#(lf)#(lf)        num_feats = feat_info.get(""NumericalFeatures"", [])#(lf)        cat_feats = feat_info.get(""CategoricalFeatures"", [])#(lf)        required_cols = num_feats + cat_feats#(lf)#(lf)        if not set(required_cols).issubset(dataset.columns):#(lf)            missing = list(set(required_cols) - set(dataset.columns))#(lf)            dataset[error_col] = f""Missing required columns: {', '.join(missing)}""#(lf)            continue#(lf)#(lf)        X = dataset[required_cols].copy()#(lf)        for col in cat_feats:#(lf)            X[col] = X[col].astype(str).fillna(""Missing_In_PQ"").replace(['None', '<NA>', '', 'nan'], 'Missing_In_PQ')#(lf)#(lf)        X_valid = X[~X[num_feats].isnull().any(axis=1)]#(lf)        idx_valid = X_valid.index#(lf)#(lf)        if not X_valid.empty:#(lf)            X_proc = preproc.transform(X_valid)#(lf)            preds = model.predict(X_proc)#(lf)            dataset.loc[idx_valid, prediction_col] = preds#(lf)        else:#(lf)            dataset[error_col] = f""No valid rows for prediction""#(lf)    except Exception as e:#(lf)        dataset[error_col] = f""Prediction failed: {e}""#(lf)#(lf)# --- STEP 5: Clean and Format Dates for Power BI ---#(lf)def fix_and_format_date(val):#(lf)    try:#(lf)        if pd.isna(val):#(lf)            return None#(lf)        val_str = str(val).strip().lower()#(lf)        if val_str in ['', 'none', 'nan', 'nat', '<na>']:#(lf)            return None#(lf)        parsed = pd.to_datetime(val_str, errors='coerce', dayfirst=False)#(lf)        if pd.isna(parsed):#(lf)            return None#(lf)        return parsed.strftime('%Y-%m-%d')#(lf)    except Exception as e:#(lf)        print(f""Date conversion error for '{val}': {e}"")#(lf)        return None#(lf)#(lf)for col in ['OrderDate', 'FuelPriceDate']:#(lf)    if col in dataset.columns:#(lf)        dataset[col] = dataset[col].apply(fix_and_format_date)#(lf)#(lf)# --- STEP 6: Clean numeric columns for Power BI compatibility ---#(lf)numeric_cols = dataset.select_dtypes(include=[np.number]).columns#(lf)for col in numeric_cols:#(lf)    dataset[col] = dataset[col].apply(lambda x: None if pd.isna(x) else x.item() if isinstance(x, np.generic) else x)#(lf)#(lf)# --- FINAL OUTPUT ---#(lf)output = dataset#(lf)print(""Script finished successfully. Returning dataset to Power BI."")",[dataset=#"Changed Type6"]),
+				    output = #"Run Python script"{[Name="output"]}[Value],
+				    #"Changed Type7" = Table.TransformColumnTypes(output,{{"ProductID", type text}, {"Category", type text}, {"Supplier", type text}, {"OrderQuantity", Int64.Type}, {"UnitPrice", type number}, {"OrderDate", type date}, {"LocationID", type text}, {"FuelID", type text}, {"RouteID", type text}, {"PredefinedRouteName", type text}, {"Country", type text}, {"State", type text}, {"City", type text}, {"Zipcode", type text}, {"FuelPriceUSDPerGallon", type number}, {"FuelPriceDate", type date}, {"OriginCountry", type text}, {"OriginLatitude", type number}, {"OriginLongitude", type number}, {"DestinationLatitude", type number}, {"DestinationLongitude", type number}, {"RouteDistanceKM", type number}, {"RouteDurationMinutes", type number}, {"AvgTemperatureCelsius", type number}, {"MaxWindSpeedMetersSec", type number}, {"TotalPrecipitationMM", type number}, {"WeatherForecastCount", Int64.Type}, {"OrderYear", Int64.Type}, {"OrderMonth", Int64.Type}, {"OrderDayOfWeek", Int64.Type}, {"OrderDayName", type text}, {"OrderDayOfYear", Int64.Type}, {"RouteDistanceMiles", type number}, {"EstimatedFuelConsumedGallons", type number}, {"FuelCostUSD", type number}, {"CarbonFootprintKG", type number}, {"TotalRevenue", type number}, {"Predicted_OrderQuantity", type number}, {"Prediction_Error_OrderQuantity", type text}, {"Predicted_RouteDurationMinutes", type number}, {"Prediction_Error_RouteDurationMinutes", type text}, {"Predicted_FuelCostUSD", type number}, {"Prediction_Error_FuelCostUSD", type text}, {"Predicted_CarbonFootprintKG", type number}, {"Prediction_Error_CarbonFootprintKG", type text}, {"Predicted_TotalRevenue", type number}, {"Prediction_Error_TotalRevenue", type text}})
+				in
+				    #"Changed Type7"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

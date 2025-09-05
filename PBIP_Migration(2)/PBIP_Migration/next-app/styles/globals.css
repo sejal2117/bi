@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #__next { height: 100%; }
+
+/* Grid background (matches 24 cols x 32px rows) */
+.canvas-grid-bg{
+  background-image:
+    linear-gradient(to right, rgba(148,163,184,.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148,163,184,.2) 1px, transparent 1px);
+  background-size: 50px 32px, 50px 32px; /* ≈ colWidth x rowHeight */
+}

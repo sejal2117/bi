@@ -1,0 +1,13 @@
+{
+  "$schema": "https://powerbi.microsoft.com/schema/pbir/1.0",
+  "name": "WF_Executive",
+  "type": "report",
+  "version": "1.0",
+  "resources": {
+    "theme": "RegisteredResources/theme.json"
+  },
+  "navigation": {
+    "homePage": 0
+  },
+  "pages": []
+}

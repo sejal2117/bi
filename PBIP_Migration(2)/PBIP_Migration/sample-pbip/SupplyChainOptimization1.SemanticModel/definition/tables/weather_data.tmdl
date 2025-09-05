@@ -1,0 +1,119 @@
+table weather_data
+	lineageTag: 4199e9d4-49f1-433a-b84f-cf2b9f0c8713
+
+	column WeatherLookupID
+		dataType: string
+		lineageTag: 71a37165-a5a8-4da7-8286-9ad696813b23
+		summarizeBy: none
+		sourceColumn: WeatherLookupID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RouteID
+		dataType: string
+		lineageTag: b226039f-a6a7-405f-b1b6-efa4afa59a6e
+		summarizeBy: none
+		sourceColumn: RouteID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PredefinedRouteName
+		dataType: string
+		lineageTag: f1dbbac8-dbc2-40bd-8bf3-8fedf5dd3c1e
+		summarizeBy: none
+		sourceColumn: PredefinedRouteName
+
+		annotation SummarizationSetBy = Automatic
+
+	column LookupDateTimeUTC
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 662a10ae-3203-428f-acd1-5c6553a1c5fe
+		summarizeBy: none
+		sourceColumn: LookupDateTimeUTC
+
+		variation Variation
+			isDefault
+			relationship: 125e5dc2-2b46-477a-985a-6c21d381df8a
+			defaultHierarchy: LocalDateTable_bd98343a-5b46-44dd-911b-5ea81146bde0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column ForecastDateTimeUTC
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3a2edbe4-264f-4222-87d1-4d2d3fddf1b4
+		summarizeBy: none
+		sourceColumn: ForecastDateTimeUTC
+
+		variation Variation
+			isDefault
+			relationship: f3e577a7-6086-4fcf-b8a3-28e0bce81c1b
+			defaultHierarchy: LocalDateTable_77d701e0-2962-4056-875d-183b9653140a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeatherDescription
+		dataType: string
+		lineageTag: 3514ad53-7bb8-4d81-81e9-c6e888c95ce5
+		summarizeBy: none
+		sourceColumn: WeatherDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column TemperatureCelsius
+		dataType: double
+		lineageTag: edf2d5cd-eecf-4a57-b0cf-671a91775117
+		summarizeBy: sum
+		sourceColumn: TemperatureCelsius
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WindSpeedMetersSec
+		dataType: double
+		lineageTag: b9e52708-2c5c-44f5-9cbc-62c945ab1b85
+		summarizeBy: sum
+		sourceColumn: WindSpeedMetersSec
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PrecipitationMM3Hr
+		dataType: double
+		lineageTag: 97857757-cfef-4474-99dd-59d5822aa308
+		summarizeBy: sum
+		sourceColumn: PrecipitationMM3Hr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Bad Weather Flag' = ```
+			IF('weather_data'[WeatherDescription] IN {"light rain", "moderate rain"},
+			1,
+			0 
+			)
+			```
+		formatString: 0
+		lineageTag: d4791afb-00fe-484e-a1c4-76e21b774680
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition weather_data = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\DAHMAD\Downloads\FinalSupplyChain\Supply_B\supply_chain_data_raw\weather_data.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"WeatherLookupID", type text}, {"RouteID", type text}, {"PredefinedRouteName", type text}, {"LookupDateTimeUTC", type datetime}, {"ForecastDateTimeUTC", type datetime}, {"WeatherDescription", type text}, {"TemperatureCelsius", type number}, {"WindSpeedMetersSec", type number}, {"PrecipitationMM3Hr", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

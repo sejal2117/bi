@@ -1,0 +1,24 @@
+{
+  "name": "Wireframe Theme",
+  "dataColors": [
+    "#4e79a7",
+    "#f28e2b",
+    "#e15759",
+    "#76b7b2",
+    "#59a14f",
+    "#edc948"
+  ],
+  "background": "#ffffff",
+  "foreground": "#1f2937",
+  "visualStyles": {
+    "card": {
+      "titleColor": "#6b7280",
+      "valueColor": "#111827",
+      "background": "#ffffff"
+    },
+    "chart": {
+      "axisColor": "#6b7280",
+      "gridColor": "#e5e7eb"
+    }
+  }
+}

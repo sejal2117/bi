@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Translated Logic",
+  "type": "object",
+  "properties": {
+    "daxMeasures":  { "type": "array", "items": { "type": "object", "properties": { "table":{"type":"string"}, "name":{"type":"string"}, "expression":{"type":"string"} }, "required": ["name","expression"] } },
+    "calcColumns":  { "type": "array" },
+    "mQueries":     { "type": "array" },
+    "notes":        { "type": "array", "items": { "type": "string" } }
+  }
+}

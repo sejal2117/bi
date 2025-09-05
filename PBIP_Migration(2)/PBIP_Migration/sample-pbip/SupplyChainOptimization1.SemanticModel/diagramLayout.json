@@ -1,0 +1,161 @@
+{
+  "defaultDiagram": "All tables",
+  "diagrams": [
+    {
+      "hideKeyFieldsWhenCollapsed": false,
+      "name": "All tables",
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 87
+          },
+          "nodeIndex": "fuel_price_data",
+          "nodeLineageTag": "34739b5f-893b-419b-9f3b-fc83e49dafd2",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 284,
+            "y": 75
+          },
+          "nodeIndex": "location_data",
+          "nodeLineageTag": "ff0a9905-1efc-4eaf-8235-11d3ca55e230",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 852,
+            "y": 39
+          },
+          "nodeIndex": "route_data",
+          "nodeLineageTag": "6aa99acd-c413-4ea6-b212-f344ac35e658",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1136,
+            "y": 27
+          },
+          "nodeIndex": "Aggregated Weather",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1754,
+            "y": -25
+          },
+          "nodeIndex": "product_data",
+          "nodeLineageTag": "83734b1b-bd6f-4c08-b1d5-4ab23f7056cd",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1470,
+            "y": -23
+          },
+          "nodeIndex": "weather_data",
+          "nodeLineageTag": "4199e9d4-49f1-433a-b84f-cf2b9f0c8713",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2038,
+            "y": 25
+          },
+          "nodeIndex": "alternative_routes_suggestions",
+          "nodeLineageTag": "1089475a-89ee-4f26-86e5-db41f2006f8c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 568,
+            "y": 25
+          },
+          "nodeIndex": "SupplyChainData",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2322,
+            "y": 75
+          },
+          "nodeIndex": "_Measures",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2606,
+            "y": 75
+          },
+          "nodeIndex": "Calculated Measures",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2890,
+            "y": 75
+          },
+          "nodeIndex": "sustainability",
+          "nodeLineageTag": "8dd6d403-dc61-44e1-aa0e-8eb3326d1e62",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "ordinal": 0,
+      "pinKeyFieldsToTop": false,
+      "scrollPosition": {
+        "x": 2133.436179473021,
+        "y": 0
+      },
+      "showExtraHeaderInfo": false,
+      "tablesLocked": false,
+      "zoomValue": 95.96412556053812
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "version": "1.1.0"
+}

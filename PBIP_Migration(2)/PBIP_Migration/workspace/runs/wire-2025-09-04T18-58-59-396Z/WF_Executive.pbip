@@ -1,0 +1,15 @@
+{
+  "$schema": "https://powerbi.microsoft.com/schema/pbip/1.0",
+  "version": "1.0",
+  "name": "WF_Executive",
+  "items": [
+    {
+      "path": "WF_Executive.Report",
+      "type": "Report"
+    },
+    {
+      "path": "WF_Executive.SemanticModel",
+      "type": "SemanticModel"
+    }
+  ]
+}

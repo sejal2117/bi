@@ -1,0 +1,139 @@
+relationship 230717d1-d840-4e98-ab49-4f891213793b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fuel_price_data.FuelPriceDate
+	toColumn: LocalDateTable_235b17fc-65ff-488f-96fe-84e39b9150fe.Date
+
+relationship 4d47dcd8-45f3-49e7-952f-e9c2bd7beb6b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: product_data.OrderDate
+	toColumn: LocalDateTable_912f8432-d929-44ce-ad48-6afde03801c7.Date
+
+relationship 125e5dc2-2b46-477a-985a-6c21d381df8a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: weather_data.LookupDateTimeUTC
+	toColumn: LocalDateTable_bd98343a-5b46-44dd-911b-5ea81146bde0.Date
+
+relationship f3e577a7-6086-4fcf-b8a3-28e0bce81c1b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: weather_data.ForecastDateTimeUTC
+	toColumn: LocalDateTable_77d701e0-2962-4056-875d-183b9653140a.Date
+
+relationship AutoDetected_3a5080de-6dfb-40a8-baa6-0e9b7fe4efa9
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: product_data.FuelID
+	toColumn: fuel_price_data.FuelID
+
+relationship AutoDetected_2ca1fd21-1716-4423-bfa5-a01ea2f032a8
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: product_data.LocationID
+	toColumn: location_data.LocationID
+
+relationship AutoDetected_00250fea-4219-4f20-ab82-fdcb96d80789
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: route_data.RouteID
+	toColumn: product_data.RouteID
+
+relationship AutoDetected_6f7e5b14-68e3-4943-a2a5-48819f9745fb
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Aggregated Weather'.RouteID
+	toColumn: product_data.RouteID
+
+relationship AutoDetected_df5ee851-9ead-4910-91b6-84ad85aabfce
+	isActive: false
+	fromColumn: weather_data.RouteID
+	toColumn: product_data.RouteID
+
+relationship 5d0c01b4-4766-4183-8f0a-2327805f3a80
+	joinOnDateBehavior: datePartOnly
+	fromColumn: alternative_routes_suggestions.Alternative_Suggestion_Timestamp
+	toColumn: LocalDateTable_d166f3f2-a2dd-45e2-9922-2282624a81ce.Date
+
+relationship c675421a-7d9e-4255-930e-daa900e0d75c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: SupplyChainData.OrderDate
+	toColumn: LocalDateTable_58dcf891-0a05-4669-ae66-e6e5db9aeb2c.Date
+
+relationship 37d92f0a-7601-44e8-b549-013360775c7c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: SupplyChainData.FuelPriceDate
+	toColumn: LocalDateTable_4afe4ae8-8445-4022-b3f9-9c61a16a2eab.Date
+
+relationship AutoDetected_9bd48c04-f200-47a6-a161-4e8c669376b8
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: SupplyChainData.FuelID
+	toColumn: fuel_price_data.FuelID
+
+relationship AutoDetected_6c8dd33e-2c97-4d4d-b038-2bb8fb23b0b1
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: SupplyChainData.LocationID
+	toColumn: location_data.LocationID
+
+relationship AutoDetected_f7e238ac-94a1-4bad-abcd-866c4b1f96c9
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: product_data.ProductID
+	toColumn: SupplyChainData.ProductID
+
+relationship AutoDetected_c9e4f391-25ff-4376-8e9d-c805915a9dde
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: route_data.RouteID
+	toColumn: SupplyChainData.RouteID
+
+relationship AutoDetected_4c1d8e0f-e97a-4dff-80f1-a1a1c7a46881
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Aggregated Weather'.RouteID
+	toColumn: SupplyChainData.RouteID
+
+relationship AutoDetected_aa69ca9f-e3c9-46f3-a830-8b6643768b45
+	fromColumn: weather_data.RouteID
+	toColumn: SupplyChainData.RouteID
+
+relationship afaab5cc-a2a1-bf4b-943c-33e1274187bf
+	crossFilteringBehavior: bothDirections
+	fromColumn: alternative_routes_suggestions.Original_ProductID
+	toColumn: SupplyChainData.ProductID
+
+relationship AutoDetected_14188520-b73f-47e6-8941-98ad6550ab78
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: SupplyChainData.RouteID
+	toColumn: sustainability.RouteID
+
+relationship AutoDetected_80be7f42-a704-462e-be51-86ab96de2780
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: route_data.RouteID
+	toColumn: sustainability.RouteID
+
+relationship AutoDetected_ee972528-d436-44a0-959e-a63a7605053d
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Aggregated Weather'.RouteID
+	toColumn: sustainability.RouteID
+
+relationship AutoDetected_b5ce55a9-4abb-464c-b049-ead69f6d2b0e
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: product_data.RouteID
+	toColumn: sustainability.RouteID
+
+relationship AutoDetected_00e462a0-0494-4bb9-8bb3-4e706a171a54
+	isActive: false
+	fromColumn: weather_data.RouteID
+	toColumn: sustainability.RouteID
+
